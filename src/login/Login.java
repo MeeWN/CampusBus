@@ -1,20 +1,13 @@
 
 package login;
 import java.awt.EventQueue;
-//import java.awt.event.WindowAdapter;
-//import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import javax.swing.JComponent;
-//import javax.swing.JFrame;
-//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-//import javax.swing.JPasswordField;
-//import javax.swing.JTextField;
-//import java.awt.Font;
+
 
 public class Login extends javax.swing.JFrame {
     public static String id;
