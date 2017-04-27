@@ -1,40 +1,52 @@
 package com.example.mee.home;
 
+import android.accounts.NetworkErrorException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-import com.example.mee.home.core.Auth;
+import com.example.mee.home.core.Model.Auth;
+import com.example.mee.home.core.UserController;
 
 public class Login extends AppCompatActivity {
+    private EditText username;
+    private EditText password;
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        username = (EditText)findViewById(R.id.username);
+        password = (EditText)findViewById(R.id.password);
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auth getAuth = new Auth();
-                getAuth.execute();
-            }
+                   // Log.d("Info ","ButtonClicked");
+                   UserController controller = new UserController(
+                           username.getText().toString(),
+                           password.getText().toString()
+                   );
+                   if (controller.checkLogin()){
+                       Intent mainIntent =new Intent(Login.this,MainActivity.class);
+                       mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       startActivityForResult(mainIntent,1);
+
+                   }else{
+                       Log.e("Failed",":(");
+                   }
+               }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }
