@@ -1,7 +1,9 @@
 package com.example.mee.home;
 
 import android.accounts.NetworkErrorException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +37,12 @@ public class Login extends AppCompatActivity {
                            password.getText().toString()
                    );
                    if (controller.checkLogin()){
+                       controller.loadUserData();
+                       SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                       SharedPreferences.Editor sharedpfEditor = sharedpf.edit();
+                       sharedpfEditor.putString("username",controller.getRealUsername());
+                       sharedpfEditor.putString("name",controller.getName());
+                       sharedpfEditor.putString("facuty",controller.getFacuty());
                        Intent mainIntent =new Intent(Login.this,MainActivity.class);
                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                        startActivityForResult(mainIntent,1);

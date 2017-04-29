@@ -62,8 +62,8 @@ public class Auth extends AsyncTask<String, Integer, Boolean> {
 
     }
 
-    public JSONArray getJson() {
-        return json;
+    public JSONObject getJson() {
+        return jsonobj;
     }
 
     public void setJson(JSONArray json) {

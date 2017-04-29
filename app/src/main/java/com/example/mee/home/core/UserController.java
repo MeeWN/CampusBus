@@ -16,6 +16,8 @@ public class UserController {
 
     private String realUsername;
     private String realPassword = "";
+    private String name;
+    private String facuty;
     private String givenPassword;
     private String url;
     private Auth conn;
@@ -35,12 +37,53 @@ public class UserController {
             e.printStackTrace();
         }
         this.realPassword=conn.getPassword();
-        int count=0;
         while (realPassword==null){
             this.realPassword=conn.getPassword();
         }
     }
 
+    public void loadUserData(){
+        JSONObject jobj =  conn.getJson();
+       try{
+           this.name = jobj.getString("name");
+           this.facuty = jobj.getString("facuty");
+       }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public String getRealUsername() {
+        return realUsername;
+    }
+
+    public void setRealUsername(String realUsername) {
+        this.realUsername = realUsername;
+    }
+
+    public String getRealPassword() {
+        return realPassword;
+    }
+
+    public void setRealPassword(String realPassword) {
+        this.realPassword = realPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFacuty() {
+        return facuty;
+    }
+
+    public void setFacuty(String facuty) {
+        this.facuty = facuty;
+    }
 
     public boolean checkLogin(){
         if(givenPassword.equals(realPassword)){
@@ -49,6 +92,8 @@ public class UserController {
             return false;
         }
     }
+
+
 
 
 

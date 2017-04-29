@@ -1,6 +1,8 @@
 package com.example.mee.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -25,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     long time =10000;
     TextView from,to,timeText ;
     private static final String FORMAT = "%02d:%02d:%02d";
+    private SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
     int seconds , minutes;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
