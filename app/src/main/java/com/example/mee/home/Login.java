@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
                        sharedpfEditor.putString("username",controller.getRealUsername());
                        sharedpfEditor.putString("name",controller.getName());
                        sharedpfEditor.putString("facuty",controller.getFacuty());
+                       sharedpfEditor.commit();
                        Intent mainIntent =new Intent(Login.this,MainActivity.class);
                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                        startActivityForResult(mainIntent,1);

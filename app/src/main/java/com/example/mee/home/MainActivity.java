@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
     long time =10000;
     TextView from,to,timeText ;
     private static final String FORMAT = "%02d:%02d:%02d";
-    private SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+    private SharedPreferences sharedpf ;
+    private TextView viewName;
+    private TextView viewUsername;
+    private TextView viewFacuty;
 
     int seconds , minutes;
     @Override
@@ -36,7 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        viewName = (TextView)findViewById(R.id.viewName);
+        viewUsername = (TextView)findViewById(R.id.viewUsername);
+        viewFacuty = (TextView)findViewById(R.id.viewFacuty);
+        viewName.setText(sharedpf.getString("name","Unknown"));
+        viewUsername.setText(sharedpf.getString("username","unknown"));
+        viewFacuty.setText(sharedpf.getString("facuty","unknown"));
 
         text1=(TextView)findViewById(R.id.cd);
 
