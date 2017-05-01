@@ -9,53 +9,6 @@
     tools:context="com.example.mee.home.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <StackView
-        android:id="@+id/stackView2"
-        android:layout_width="300dp"
-        android:layout_height="90dp"
-        android:background="?android:attr/colorButtonNormal"
-        app:layout_constraintBottom_toTopOf="@+id/cd"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ยังไม่ได้ทำรายการ"
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stackView2"
-        app:layout_constraintLeft_toRightOf="@+id/stackView2"
-        app:layout_constraintRight_toLeftOf="@+id/stackView2"
-        app:layout_constraintTop_toBottomOf="@+id/stackView2"
-        app:layout_constraintVertical_bias="0.527" />
-
-    <TextView
-        android:id="@+id/cd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColorLink="@android:color/background_dark"
-        app:layout_constraintBottom_toTopOf="@+id/bus"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stackView2" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#009688"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp">
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/bus"
         android:layout_width="55dp"
@@ -64,12 +17,12 @@
         android:layout_row="0"
         android:layout_weight="1"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/school_bus"
+        android:layout_marginLeft="23dp"
         app:layout_constraintLeft_toRightOf="@+id/noti"
-        app:layout_constraintRight_toLeftOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/stackView2"
-        app:layout_constraintVertical_bias="0.604"
-        app:srcCompat="@drawable/school_bus" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="58dp"
+        android:layout_marginStart="23dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -81,9 +34,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.52" />
+        tools:layout_editor_absoluteY="18dp" />
 
     <ImageView
         android:id="@+id/report"
@@ -93,12 +44,12 @@
         android:layout_row="4"
         android:layout_weight="1"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/clipboard"
+        android:layout_marginLeft="42dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/noti"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"
-        app:srcCompat="@drawable/clipboard" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="58dp"
+        android:layout_marginStart="42dp" />
 
     <ImageView
         android:id="@+id/noti"
@@ -108,70 +59,10 @@
         android:layout_row="2"
         android:layout_weight="1"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toRightOf="@+id/report"
-        app:layout_constraintRight_toLeftOf="@+id/bus"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"
-        app:srcCompat="@drawable/alarm_clock" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toRightOf="@+id/bus"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stackView2"
-        app:layout_constraintVertical_bias="0.603"
-        app:srcCompat="@android:drawable/alert_dark_frame" />
-
-    <TextView
-        android:id="@+id/tFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintLeft_toRightOf="@+id/textView"
-        app:layout_constraintRight_toLeftOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39999998" />
-
-    <TextView
-        android:id="@+id/tTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintLeft_toRightOf="@+id/textView"
-        app:layout_constraintRight_toLeftOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39999998" />
-
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/stackView2"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintLeft_toRightOf="@+id/textView"
-        app:layout_constraintRight_toLeftOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.32999998"
-        app:srcCompat="@drawable/up_arrow" />
+        app:srcCompat="@drawable/alarm_clock"
+        tools:layout_editor_absoluteY="398dp"
+        tools:layout_editor_absoluteX="125dp" />
 
     <TextView
         android:id="@+id/viewFacuty"
@@ -182,7 +73,8 @@
         android:text="คณะเทคโนโลยีสารสนเทศ"
         android:textSize="14sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/viewUsername"
+        android:layout_marginEnd="32dp" />
 
     <TextView
         android:id="@+id/viewUsername"
@@ -193,7 +85,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/viewName"
         android:layout_marginRight="32dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="32dp" />
 
     <TextView
         android:id="@+id/viewName"
@@ -204,6 +97,25 @@
         android:text="นายแพททริค เอมเมล"
         android:textSize="24sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="8dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="166dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

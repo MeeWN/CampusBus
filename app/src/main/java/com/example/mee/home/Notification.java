@@ -24,9 +24,9 @@ import org.w3c.dom.Text;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-import static com.example.mee.home.R.id.cd;
-import static com.example.mee.home.R.id.hour;
+//
+//import static com.example.mee.home.R.id.cd;
+//import static com.example.mee.home.R.id.hour;
 
 public class Notification extends AppCompatActivity {
     static boolean stHour,stMin30,stMin15,stMin5;

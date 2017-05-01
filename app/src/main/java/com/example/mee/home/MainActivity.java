@@ -9,14 +9,20 @@ import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.mee.home.core.CardAdapter;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView viewName;
     private TextView viewUsername;
     private TextView viewFacuty;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private Context context;
+    private  RecyclerView.Adapter adapter;
 
     int seconds , minutes;
     @Override
@@ -48,44 +58,56 @@ public class MainActivity extends AppCompatActivity {
         viewName.setText(sharedpf.getString("name","Unknown"));
         viewUsername.setText(sharedpf.getString("username","unknown"));
         viewFacuty.setText(sharedpf.getString("facuty","unknown"));
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new CardAdapter();
+        recyclerView.setAdapter(adapter);
 
-        text1=(TextView)findViewById(R.id.cd);
 
-        new CountDownTimer(time, 1000) { // adjust the milli seconds here
 
-            public void onTick(long millisUntilFinished) {
+//COUNTDOWN TIMER
+//        text1=(TextView)findViewById(R.id.cd);
+//
+//        new CountDownTimer(time, 1000) { // adjust the milli seconds here
+//
+//            public void onTick(long millisUntilFinished) {
+//
+//                text1.setText("รถจะออกใน  "+String.format(FORMAT,
+//                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+//                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+//                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+//                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+//                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+//            }
+//
+//            public void onFinish() {
+//                text1.setText("ีรถออกจากสถานีแล้ว");
+//            }
+//        }.start();
+//
+//        FloatingActionButton plus = (FloatingActionButton) findViewById(R.id.plus);
+//        plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(toggle%2==0) {
+//                    findViewById(R.id.bus).setVisibility(View.VISIBLE);
+//                    findViewById(R.id.noti).setVisibility(View.VISIBLE);
+//                    findViewById(R.id.report).setVisibility(View.VISIBLE);
+//                    toggle++;
+//                }
+//                else{
+//                    findViewById(R.id.bus).setVisibility(View.INVISIBLE);
+//                    findViewById(R.id.noti).setVisibility(View.INVISIBLE);
+//                    findViewById(R.id.report).setVisibility(View.INVISIBLE);
+//                    toggle++;
+//                }
+//            }
+//        });
 
-                text1.setText("รถจะออกใน  "+String.format(FORMAT,
-                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-            }
 
-            public void onFinish() {
-                text1.setText("ีรถออกจากสถานีแล้ว");
-            }
-        }.start();
 
-        FloatingActionButton plus = (FloatingActionButton) findViewById(R.id.plus);
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(toggle%2==0) {
-                    findViewById(R.id.bus).setVisibility(View.VISIBLE);
-                    findViewById(R.id.noti).setVisibility(View.VISIBLE);
-                    findViewById(R.id.report).setVisibility(View.VISIBLE);
-                    toggle++;
-                }
-                else{
-                    findViewById(R.id.bus).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.noti).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.report).setVisibility(View.INVISIBLE);
-                    toggle++;
-                }
-            }
-        });
         ImageView bus = (ImageView) findViewById(R.id.bus);
         bus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,21 +165,23 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                TextView f =(TextView)findViewById(R.id.textView);
-                f.setVisibility(View.INVISIBLE);
-                ImageView arrow =(ImageView) findViewById(R.id.arrow);
-                arrow.setVisibility(View.VISIBLE);
-                String strEditText = data.getStringExtra("stSpinner");
-                from = (TextView)findViewById(R.id.tFrom);
-                from.setText(strEditText);
-                String strEditText2 = data.getStringExtra("stSpinner2");
-                to = (TextView)findViewById(R.id.tTo);
-                to.setText(strEditText2);
-            }
-        }
-    }
+//    //GET DATA FROM RESERVATION PAGE AND SHOW
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1) {
+//            if (resultCode == RESULT_OK) {
+//                TextView f =(TextView)findViewById(R.id.textView);
+//                f.setVisibility(View.INVISIBLE);
+//                ImageView arrow =(ImageView) findViewById(R.id.arrow);
+//                arrow.setVisibility(View.VISIBLE);
+//                String strEditText = data.getStringExtra("stSpinner");
+//                from = (TextView)findViewById(R.id.tFrom);
+//                from.setText(strEditText);
+//                String strEditText2 = data.getStringExtra("stSpinner2");
+//                to = (TextView)findViewById(R.id.tTo);
+//                to.setText(strEditText2);
+//            }
+//        }
+//    }
+
 }
