@@ -67,7 +67,7 @@
                 android:layout_marginBottom="18dp" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textTime"
                 android:layout_width="99dp"
                 android:layout_height="27dp"
                 android:layout_marginBottom="31dp"
