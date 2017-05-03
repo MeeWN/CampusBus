@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.mee.home.core.CardAdapter;
 
 import org.w3c.dom.Text;
 
@@ -62,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new CardAdapter();
         recyclerView.setAdapter(adapter);
+
 
 
 

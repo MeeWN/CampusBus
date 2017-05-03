@@ -2,6 +2,7 @@ package com.example.mee.home.core;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,46 +12,122 @@ import android.widget.TextView;
 import com.example.mee.home.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by aftei on 5/1/2017.
  */
 
-public class CardAdapter extends RecyclerView.Adapter {
-    Context mContext;
-    JSONArray jArray;
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView depart, arrive ,time;
+// Provide a reference to the views for each data item
+// Complex data items may need more than one view per item, and
+// you provide access to all the views for a data item in a view holder
+//public static class ViewHolder extends RecyclerView.ViewHolder {
+//    // each data item is just a string in this case
+//    public TextView mTextView;
+//    public ViewHolder(TextView v) {
+//        super(v);
+//        mTextView = v;
+//    }
+//}
+//
+//    // Provide a suitable constructor (depends on the kind of dataset)
+//    public MyAdapter(String[] myDataset) {
+//        mDataset = myDataset;
+//    }
+//
+//    // Create new views (invoked by the layout manager)
+//    @Override
+//    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+//        // create a new view
+//        TextView v = (TextView) LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.card_reservation, parent, false);
+//        // set the view's size, margins, paddings and layout parameters
+//        ViewHolder vh = new ViewHolder(v);
+//        return vh;
+//    }
+//
+//    // Replace the contents of a view (invoked by the layout manager)
+//    @Override
+//    public void onBindViewHolder(ViewHolder holder, int position) {
+//        // - get element from your dataset at this position
+//        // - replace the contents of the view with that element
+//        holder.mTextView.setText(mDataset[position]);
+//
+//    }
+//
+//    // Return the size of your dataset (invoked by the layout manager)
+//    @Override
+//    public int getItemCount() {
+//        return mDataset.length;
+//    }
+//}
+public class CardAdapter extends RecyclerView
+        .Adapter<CardAdapter
+        .DataObjectHolder> {
+    private static String LOG_TAG = "MyRecyclerViewAdapter";
+    private JSONArray mDataset;
+    private static MyClickListener myClickListener;
 
-        public MyViewHolder(View view) {
-            super(view);
-            depart = (TextView) view.findViewById(R.id.textDeparture);
-            arrive = (TextView) view.findViewById(R.id.textArrive);
-            time = (TextView) view.findViewById(R.id.textTime);
+    public static class DataObjectHolder extends RecyclerView.ViewHolder
+            implements View
+            .OnClickListener {
+        TextView textDeparture;
+        TextView textArrive;
 
+        public DataObjectHolder(View itemView) {
+            super(itemView);
+            textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
+            textArrive = (TextView) itemView.findViewById(R.id.textArrive);
+            Log.i(LOG_TAG, "Adding Listener");
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            myClickListener.onItemClick(getAdapterPosition(), v);
         }
     }
-    public CardAdapter(Context mContext, JSONArray data){
-            this.mContext = mContext;
-            this.jArray= data;
+
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        this.myClickListener = myClickListener;
+    }
+
+    public CardAdapter(JSONArray myDataset) {
+        mDataset = myDataset;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v =(TextView) LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.card_reservation,parent,false);
-        MyViewHolder viewHolder = new MyViewHolder(v);
-        return  viewHolder;
+    public DataObjectHolder onCreateViewHolder(ViewGroup parent,
+                                               int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_reservation, parent, false);
+
+        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
+        return dataObjectHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        holder.depart.setText();
-        
+    public void onBindViewHolder(DataObjectHolder holder, int position) {
+        try{
+            /*TEST*/
+            holder.textDeparture.setText("DPT");
+            holder.textArrive.setText("ARR");
+            //holder.textArrive.setText(mDataset.get(position).getmText2());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addItem(JSONObject dataObj, int index) {
+        mDataset.put(dataObj);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mDataset.length();
+    }
+
+    public interface MyClickListener {
+        public void onItemClick(int position, View v);
     }
 }
