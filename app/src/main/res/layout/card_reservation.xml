@@ -26,7 +26,8 @@
                 android:text="To"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="102dp" />
+                app:layout_constraintLeft_toRightOf="@+id/imageView2"
+                android:layout_marginLeft="16dp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -36,7 +37,8 @@
                 android:text="From"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="102dp" />
+                app:layout_constraintLeft_toRightOf="@+id/imageView2"
+                android:layout_marginLeft="15dp" />
 
             <TextView
                 android:id="@+id/textArrive"
@@ -47,14 +49,17 @@
                 android:text="BKT"
                 android:textSize="30sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textDeparture" />
+                app:layout_constraintTop_toBottomOf="@+id/textDeparture"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textDeparture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-1dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:text="BMD"
                 android:textSize="30sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView11"

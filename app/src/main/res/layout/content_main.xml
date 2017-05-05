@@ -101,19 +101,14 @@
         android:layout_marginEnd="8dp" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="166dp"
+        android:id="@+id/recycleView"
+        android:layout_width="373dp"
+        android:layout_height="379dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.v7.widget.RecyclerView>
+        tools:layout_editor_absoluteX="-54dp"
+        tools:layout_editor_absoluteY="116dp" />
 
 </android.support.constraint.ConstraintLayout>

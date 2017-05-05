@@ -5,6 +5,8 @@ import com.example.mee.home.core.Model.Reservation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by aftei on 4/30/2017.
  */
@@ -24,9 +26,15 @@ public class ReservationController {
         return reservation.getDataArray();
     }
 
-    public JSONArray getWhere(int id){
+    public JSONArray getWhere(int id)  {
         reservation.setUrl("http://ebus.dreaminc.xyz/reserve/"+id);
         reservation.execute();
+        return reservation.getDataArray();
+    }
+
+    public JSONArray getWhere(String id) throws ExecutionException, InterruptedException {
+        reservation.setUrl("http://ebus.dreaminc.xyz/reserve/"+id);
+        reservation.execute().get();
         return reservation.getDataArray();
     }
 

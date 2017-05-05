@@ -13,6 +13,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
@@ -23,8 +24,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import com.example.mee.home.core.CardAdapter;
+import com.example.mee.home.core.ReservationController;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView viewFacuty;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private Context context;
-    private  RecyclerView.Adapter adapter;
+    private RecyclerView.Adapter adapter;
+    private ReservationController reserveController;
+    private JSONArray dataSet;
+    private JSONObject dataobj;
+    private String username;
 
     int seconds , minutes;
     @Override
@@ -57,13 +69,21 @@ public class MainActivity extends AppCompatActivity {
         viewName.setText(sharedpf.getString("name","Unknown"));
         viewUsername.setText(sharedpf.getString("username","unknown"));
         viewFacuty.setText(sharedpf.getString("facuty","unknown"));
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        username = sharedpf.getString("username","59130500001");
+        reserveController = new ReservationController();
+        try {
+            dataSet = reserveController.getWhere(username);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        CardAdapter cardAdapter = new CardAdapter(dataSet);
+        recyclerView = (RecyclerView)findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
-
-
+        recyclerView.setAdapter(cardAdapter);
 
 
 //COUNTDOWN TIMER
