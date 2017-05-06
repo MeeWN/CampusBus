@@ -3,6 +3,9 @@ package com.example.mee.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -25,6 +28,7 @@ import android.widget.TextView;
 
 
 import com.example.mee.home.core.CardAdapter;
+import com.example.mee.home.core.DBHelper;
 import com.example.mee.home.core.ReservationController;
 
 import org.json.JSONArray;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private JSONArray dataSet;
     private JSONObject dataobj;
     private String username;
-
+    private DBHelper helper;
     int seconds , minutes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        helper= new DBHelper(this);
         sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         viewName = (TextView)findViewById(R.id.viewName);
         viewUsername = (TextView)findViewById(R.id.viewUsername);
