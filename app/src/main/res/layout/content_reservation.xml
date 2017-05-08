@@ -71,12 +71,12 @@
         android:entries="@array/from_arrays"
         android:prompt="@string/to_prompt"
         android:spinnerMode="dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintLeft_toRightOf="@+id/textView3"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313"
-        app:layout_constraintHorizontal_bias="0.619" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <Spinner
         android:id="@+id/spinner3"

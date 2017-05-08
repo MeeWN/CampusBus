@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -49,6 +50,42 @@ public class Reservation extends AppCompatActivity {
             Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
             Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
             SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+            Spinner a = (Spinner) findViewById(R.id.spinner3);
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                    R.array.weight, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        a.setAdapter(adapter);
+        a.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                    if (a.getSelectedItem().toString().trim().equals("Kilogram")) {
+                        if (!b.getText().toString().isEmpty()) {
+                            float value1 = Float.parseFloat(b.getText().toString());
+                            float kg = value1;
+                            c.setText(Float.toString(kg));
+                            float gram = value1 * 1000;
+                            d.setText(Float.toString(gram));
+                            float carat = value1 * 5000;
+                            e.setText(Float.toString(carat));
+                            float ton = value1 / 908;
+                            f.setText(Float.toString(ton));
+                        }
+
+                    }
+
+
+
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // Another interface callback
+                }
+        });
+                // Inflate the layout for this fragment
+                return v;
+            }
+
+            //END OF SHIT
 
             @Override
             public void onClick(View v) {
