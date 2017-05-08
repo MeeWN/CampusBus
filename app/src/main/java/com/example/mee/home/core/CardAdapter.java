@@ -107,12 +107,11 @@ public class CardAdapter extends RecyclerView
     }
 
     @Override
+    // OnCreate Each Card
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         try{
-            /*TEST*/
-//            holder.textDeparture.setText("DPT");
-//            holder.textArrive.setText("ARR");
-            holder.textArrive.setText(mDataset.getJSONObject(position).getString(""));
+            holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
+            holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
         }catch (Exception e){
             e.printStackTrace();
         }

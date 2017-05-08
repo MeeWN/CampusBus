@@ -60,17 +60,18 @@ public class MainActivity extends AppCompatActivity {
         reserveController = new ReservationController();
         try {
             dataSet = reserveController.getWhere(username);
+            CardAdapter cardAdapter = new CardAdapter(dataSet);
+            recyclerView = (RecyclerView)findViewById(R.id.recycleView);
+            recyclerView.setHasFixedSize(true);
+            linearLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(cardAdapter);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CardAdapter cardAdapter = new CardAdapter(dataSet);
-        recyclerView = (RecyclerView)findViewById(R.id.recycleView);
-        recyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(cardAdapter);
+
 
 
 //COUNTDOWN TIMER
