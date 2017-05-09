@@ -53,9 +53,12 @@ public class Reservation extends AppCompatActivity {
 
             Spinner a = (Spinner) findViewById(R.id.spinner3);
 
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
-                    R.array.weight, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    new View(con),
+                    R.array.from_arrays,
+                    R.layout.support_simple_spinner_dropdown_item
+            );
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
 
         a.setAdapter(adapter);
         a.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
