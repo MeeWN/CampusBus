@@ -10,108 +10,100 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.mee.home.core.Model.PostReserve;
-
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import static android.R.attr.value;
 import static com.example.mee.home.R.id.spinner;
 import static com.example.mee.home.R.id.spinner2;
 
-public class Reservation extends AppCompatActivity {
-    String stSpinner,stSpinner2,stSpinner3;
-    PostReserve postReserve;
+public class Reservation extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    private String stSpinner, stSpinner2, stSpinner3;
+    private PostReserve postReserve;
+    private Spinner spinner;
+    private Spinner spinner2;
+    private Spinner spinner3;
+    private Context context;
+    private String selected;
+    String[] from,BMD,BKT,KX,RM2;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-      /*  Button fab = (Button) findViewById(R.id.button);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Reservation Complete", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
+        selected = "from";
+        context = this;
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
+        from = getResources().getStringArray(R.array.from);
+        BMD = getResources().getStringArray(R.array.BMD);
+        BKT = getResources().getStringArray(R.array.BKT);
+        KX = getResources().getStringArray(R.array.KX);
+        RM2 = getResources().getStringArray(R.array.RM2);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,getSelected());
+        spinner.setAdapter(adapter);
+        spinner2.setAdapter(adapter);
+        SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         Button btnSubmit = (Button) findViewById(R.id.btnReserv);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            Spinner spinner = (Spinner) findViewById(R.id.spinner);
-            Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-            Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-            SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
-            Spinner a = (Spinner) findViewById(R.id.spinner3);
+        //END OF SHIT
 
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                    new View(con),
-                    R.array.from_arrays,
-                    R.layout.support_simple_spinner_dropdown_item
-            );
-        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+//            @Override
+//            public void onClick(View v) {
+//                stSpinner = spinner.getSelectedItem().toString();
+//                stSpinner2 = spinner2.getSelectedItem().toString();
+//                stSpinner3 = spinner3.getSelectedItem().toString();
+//                postReserve = new PostReserve(
+//                        sharedpf.getString("username","59130500001"),
+//                        "2"
+//                );
+//                postReserve.execute("http://ebus.dreaminc.xyz/reserve/save");
+//                Intent intent = new Intent();
+////                intent.putExtra("stSpinner",stSpinner);
+////                intent.putExtra("stSpinner2",stSpinner2);
+////                intent.putExtra("stSpinner3",stSpinner3);
+//                setResult(RESULT_OK,intent);
+//                finish();
+//            }
+//        });
+//    }
 
-        a.setAdapter(adapter);
-        a.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                    if (a.getSelectedItem().toString().trim().equals("Kilogram")) {
-                        if (!b.getText().toString().isEmpty()) {
-                            float value1 = Float.parseFloat(b.getText().toString());
-                            float kg = value1;
-                            c.setText(Float.toString(kg));
-                            float gram = value1 * 1000;
-                            d.setText(Float.toString(gram));
-                            float carat = value1 * 5000;
-                            e.setText(Float.toString(carat));
-                            float ton = value1 / 908;
-                            f.setText(Float.toString(ton));
-                        }
-
-                    }
-
-
-
-                public void onNothingSelected(AdapterView<?> parent) {
-                    // Another interface callback
-                }
-        });
-                // Inflate the layout for this fragment
-                return v;
-            }
-
-            //END OF SHIT
-
-            @Override
-            public void onClick(View v) {
-                stSpinner = spinner.getSelectedItem().toString();
-                stSpinner2 = spinner2.getSelectedItem().toString();
-                stSpinner3 = spinner3.getSelectedItem().toString();
-                postReserve = new PostReserve(
-                        sharedpf.getString("username","59130500001"),
-                        "2"
-                );
-                postReserve.execute("http://ebus.dreaminc.xyz/reserve/save");
-                Intent intent = new Intent();
-//                intent.putExtra("stSpinner",stSpinner);
-//                intent.putExtra("stSpinner2",stSpinner2);
-//                intent.putExtra("stSpinner3",stSpinner3);
-                setResult(RESULT_OK,intent);
-                finish();
-            }
-        });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        changeValue(parent.getItemAtPosition(position).toString());
+        selected = parent.getItemAtPosition(position).toString();
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public String[] getSelected(){
+        if (selected.equals("BMD")){
+            return BMD;
+        }else if (selected.equals("BKT")){
+            return BKT;
+        }else if (selected.equals("KX")){
+            return KX;
+        }else if (selected.equals("RM2")){
+            return RM2;
+        }else{
+            return from;
+        }
+    }
 }
-
-

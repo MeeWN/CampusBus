@@ -10,11 +10,35 @@
     <string name="to_prompt">Select End Point</string>
     <string name="time_prompt">Select Time</string>
 
-    <string-array name="from_arrays">
-        <item>BMD</item>
+
+    <string-array name="from">
         <item>BKT</item>
         <item>RM2</item>
         <item>KX</item>
+        <item>RM2</item>
+    </string-array>
+    <string-array name="BMD">
+        <item>BKT</item>
+        <item>RM2</item>
+        <item>KX</item>
+
+    </string-array>
+    <string-array name="BKT">
+        <item>BMD</item>
+        <item>RM2</item>
+        <item>KX</item>
+
+    </string-array>
+    <string-array name="RM2">
+        <item>BMD</item>
+        <item>BKT</item>
+        <item>KX</item>
+
+    </string-array>
+    <string-array name="KX">
+        <item>BMD</item>
+        <item>BKT</item>
+        <item>RM2</item>
 
     </string-array>
 
