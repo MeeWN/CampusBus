@@ -1,12 +1,11 @@
 package com.example.mee.home.core;
 
-import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 
 import com.example.mee.home.R;
@@ -84,7 +83,8 @@ public class CardAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getAdapterPosition(), v);
+            Intent intent = new Intent(v.getContext(), Popup.class);
+            v.getContext().startActivity(intent);
         }
     }
 
