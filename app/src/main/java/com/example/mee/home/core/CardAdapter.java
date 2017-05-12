@@ -1,14 +1,20 @@
 package com.example.mee.home.core;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.mee.home.R;
+import com.example.mee.home.ReservationDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,8 +89,20 @@ public class CardAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), Popup.class);
-            v.getContext().startActivity(intent);
+//            Intent intent = new Intent(v.getContext(), Popup.class);
+//            v.getContext().startActivity(intent);
+//            LayoutInflater inflater = (LayoutInflater) v.getContext()
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View layout = inflater.inflate(R.layout.popupwindow,
+//                    (ViewGroup) layout.findViewById(R.id.pop_layout));
+//            PopupWindow pwindo = new PopupWindow(layout, 300, 370, true);
+//            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+//
+//            Button btnClosePopup = (Button) layout.findViewById(R.id.close_layout);
+//            Button btnClosePopup.setOnClickListener(cancel_button_click_listener);
+            Activity activity =(Activity) v.getContext();
+            ReservationDialog reservationDialog = new ReservationDialog();
+            reservationDialog.show(activity.getFragmentManager(),"dialog");
         }
     }
 
