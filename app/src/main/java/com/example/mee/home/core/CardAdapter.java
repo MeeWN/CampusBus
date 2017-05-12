@@ -3,6 +3,7 @@ package com.example.mee.home.core;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,12 +67,13 @@ import org.json.JSONObject;
 //        return mDataset.length;
 //    }
 //}
+    /*Activity activity =(Activity) v.getContext();
+            ReservationDialog reservationDialog = new ReservationDialog();
+            reservationDialog.show(activity.getFragmentManager(),"dialog");*/
 public class CardAdapter extends RecyclerView
         .Adapter<CardAdapter
         .DataObjectHolder> {
-    private static String LOG_TAG = "MyRecyclerViewAdapter";
     private JSONArray mDataset;
-    private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -83,32 +85,18 @@ public class CardAdapter extends RecyclerView
             super(itemView);
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
-            Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View v) {
-//            Intent intent = new Intent(v.getContext(), Popup.class);
-//            v.getContext().startActivity(intent);
-//            LayoutInflater inflater = (LayoutInflater) v.getContext()
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View layout = inflater.inflate(R.layout.popupwindow,
-//                    (ViewGroup) layout.findViewById(R.id.pop_layout));
-//            PopupWindow pwindo = new PopupWindow(layout, 300, 370, true);
-//            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-//
-//            Button btnClosePopup = (Button) layout.findViewById(R.id.close_layout);
-//            Button btnClosePopup.setOnClickListener(cancel_button_click_listener);
             Activity activity =(Activity) v.getContext();
+
             ReservationDialog reservationDialog = new ReservationDialog();
             reservationDialog.show(activity.getFragmentManager(),"dialog");
         }
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
-    }
+
 
     public CardAdapter(JSONArray myDataset) {
         mDataset = myDataset;
@@ -144,7 +132,5 @@ public class CardAdapter extends RecyclerView
         return mDataset.length();
     }
 
-    public interface MyClickListener {
-        public void onItemClick(int position, View v);
-    }
+
 }
