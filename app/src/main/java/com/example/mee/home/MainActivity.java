@@ -1,9 +1,12 @@
 package com.example.mee.home;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject dataobj;
     private String username;
     private DBHelper helper;
+    private android.app.FragmentManager fragmentManager;
+    private Fragment fragment;
     int seconds , minutes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         viewFacuty.setText(sharedpf.getString("facuty","unknown"));
         username = sharedpf.getString("username","59130500001");
         reserveController = new ReservationController();
+        fragment = new  Fragment();
+        fragmentManager = getFragmentManager();
         try {
             dataSet = reserveController.getWhere(username);
             CardAdapter cardAdapter = new CardAdapter(dataSet);

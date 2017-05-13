@@ -28,6 +28,5 @@ public class ReservationDialog extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.trip_doalog,null);
-
     }
 }

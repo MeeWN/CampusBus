@@ -1,24 +1,17 @@
 package com.example.mee.home.core;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.example.mee.home.R;
 import com.example.mee.home.ReservationDialog;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+import android.app.Fragment;
 
 /**
  * Created by aftei on 5/1/2017.
@@ -74,6 +67,11 @@ public class CardAdapter extends RecyclerView
         .Adapter<CardAdapter
         .DataObjectHolder> {
     private JSONArray mDataset;
+    private  JSONObject eachCard;
+    private static ReservationDialog rd;
+    private static Fragment fragment;
+    private static MyOnClickListener myOnClickListener;
+
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -86,13 +84,12 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             itemView.setOnClickListener(this);
+            fragment = new Fragment();
+
         }
         @Override
         public void onClick(View v) {
-            Activity activity =(Activity) v.getContext();
-
-            ReservationDialog reservationDialog = new ReservationDialog();
-            reservationDialog.show(activity.getFragmentManager(),"dialog");
+            myOnClickListener.onClick();
         }
     }
 
@@ -107,17 +104,31 @@ public class CardAdapter extends RecyclerView
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_reservation, parent, false);
-
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
+
         return dataObjectHolder;
     }
 
     @Override
     // OnCreate Each Card
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
+    public void onBindViewHolder(DataObjectHolder holder, final int position) {
         try{
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
+            myOnClickListener =new MyOnClickListener() {
+                @Override
+                public void onClick() {
+                    try{
+                        rd = new ReservationDialog(mDataset.getJSONObject(position));
+                        rd.show(fragment.getFragmentManager(),"gg");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            eachCard = mDataset.getJSONObject(position);
+            rd = new ReservationDialog(eachCard);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -130,6 +141,15 @@ public class CardAdapter extends RecyclerView
     @Override
     public int getItemCount() {
         return mDataset.length();
+    }
+
+
+        public static void onItemClick(int position, View v){
+            rd.show(fragment.getFragmentManager(),"gg");
+        }
+
+        public interface MyOnClickListener{
+            public void onClick();
     }
 
 
