@@ -20,6 +20,7 @@ public class ReservationDialog extends DialogFragment{
     public ReservationDialog() {
     }
 
+
     public ReservationDialog(JSONObject data) {
         this.data = data;
     }
