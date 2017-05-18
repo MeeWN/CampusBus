@@ -1,6 +1,7 @@
 package com.example.mee.home.core;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,13 @@ import com.example.mee.home.R;
 import com.example.mee.home.ReservationDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import android.app.Fragment;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by aftei on 5/1/2017.
@@ -68,21 +75,25 @@ public class CardAdapter extends RecyclerView
         .DataObjectHolder> {
     private JSONArray mDataset;
     private  JSONObject eachCard;
+    private static  String time;
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
-
+    private static final String FORMAT = "%02d:%02d:%02d";
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         TextView textDeparture;
         TextView textArrive;
+        TextView textTime;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
+            textTime = (TextView) itemView.findViewById(R.id.textTime);
+            time = "20:15:00";
             itemView.setOnClickListener(this);
             fragment = new Fragment();
 
@@ -111,10 +122,41 @@ public class CardAdapter extends RecyclerView
 
     @Override
     // OnCreate Each Card
-    public void onBindViewHolder(DataObjectHolder holder, final int position) {
+    public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         try{
+            eachCard = mDataset.getJSONObject(position);
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
+            //holder.textTime.setText();
+            final String[] temp= eachCard.getString("DATETIME").split(":");
+            temp[0]=temp[0];
+            temp[1]=temp[1];
+           // temp[2]=temp[2];
+            int hour=Integer.parseInt(temp[0]);
+            int minute=Integer.parseInt(temp[1]);
+            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.set(Calendar.HOUR_OF_DAY,  hour);
+            calendar.set(Calendar.MINUTE, minute);
+            final long curTime =  calendar.getTimeInMillis()-new Date().getTime();
+
+            new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
+
+                public void onTick(long millisUntilFinished) {
+
+                    holder.textTime.setText(String.format(FORMAT,
+                            TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
+
+                public void onFinish() {
+                    holder.textTime.setText("00:00");
+                }
+            }.start();
             myOnClickListener =new MyOnClickListener() {
                 @Override
                 public void onClick() {
@@ -127,7 +169,7 @@ public class CardAdapter extends RecyclerView
                 }
             };
 
-            eachCard = mDataset.getJSONObject(position);
+
             rd = new ReservationDialog(eachCard);
         }catch (Exception e){
             e.printStackTrace();

@@ -10,21 +10,6 @@
     tools:showIn="@layout/activity_main">
 
     <ImageView
-        android:id="@+id/bus"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_column="0"
-        android:layout_row="0"
-        android:layout_weight="1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/school_bus"
-        android:layout_marginLeft="23dp"
-        app:layout_constraintLeft_toRightOf="@+id/noti"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="58dp"
-        android:layout_marginStart="23dp" />
-
-    <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="76dp"
@@ -35,34 +20,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
         tools:layout_editor_absoluteY="18dp" />
-
-    <ImageView
-        android:id="@+id/report"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_column="0"
-        android:layout_row="4"
-        android:layout_weight="1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/clipboard"
-        android:layout_marginLeft="42dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="58dp"
-        android:layout_marginStart="42dp" />
-
-    <ImageView
-        android:id="@+id/noti"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_column="0"
-        android:layout_row="2"
-        android:layout_weight="1"
-        android:visibility="invisible"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:srcCompat="@drawable/alarm_clock"
-        tools:layout_editor_absoluteY="398dp"
-        tools:layout_editor_absoluteX="125dp" />
 
     <TextView
         android:id="@+id/viewFacuty"
@@ -104,11 +61,9 @@
         android:id="@+id/recycleView"
         android:layout_width="373dp"
         android:layout_height="379dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="34dp"
+        android:layout_marginLeft="-5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteX="-54dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

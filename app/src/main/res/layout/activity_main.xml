@@ -26,13 +26,58 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_gravity="top|center_horizontal"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@android:color/background_light"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/constraintLayout">
+
+        <ImageView
+            android:id="@+id/noti"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.714"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.843"
+            app:srcCompat="@drawable/alarm_clock" />
+
+        <ImageView
+            android:id="@+id/report"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.671"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.986"
+            app:srcCompat="@drawable/clipboard" />
+
+        <ImageView
+            android:id="@+id/bus"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.765"
+            app:srcCompat="@drawable/school_bus" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.design.widget.CoordinatorLayout>
