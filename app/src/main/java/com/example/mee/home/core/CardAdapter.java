@@ -2,6 +2,8 @@ package com.example.mee.home.core;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.NotificationCompat;
@@ -88,6 +90,8 @@ public class CardAdapter extends RecyclerView
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
+    public static NotiSystem notiSystem;
+    static Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
     private static final String FORMAT = "%02d:%02d:%02d";
     static long curTime;
     Notification noti = new Notification();
@@ -141,6 +145,37 @@ public class CardAdapter extends RecyclerView
     // OnCreate Each Card
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         try {
+            //Countdown
+            new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
+                public void onTick(long millisUntilFinished) {
+                    curTime=millisUntilFinished;
+                    holder.textTime.setText(String.format(FORMAT,
+                            TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                    if (millisUntilFinished >= 3599000 && millisUntilFinished <= 3601000 && Notification.stHour == true) {
+                        notiSystem.showNotification("อีก 1 ชม.รถจะออกจากสถานี",holder.itemView);
+                    }
+                    if (millisUntilFinished >= 1799000 && millisUntilFinished <= 1801000 && Notification.stMin30 == true) {
+                        notiSystem.showNotification("อีก 30 นาทีรถจะออกจากสถานี",holder.itemView);
+                    }
+                    if (millisUntilFinished >= 899000 && millisUntilFinished <= 901000 && Notification.stMin15 == true) {
+                        notiSystem.showNotification("อีก 15 นาทีรถจะออกจากสถานี",holder.itemView);
+                    }
+                    if (millisUntilFinished >= 299000 && millisUntilFinished <= 301000 && Notification.stMin5 == true) {
+                        notiSystem.showNotification("อีก 5 นาทีรถจะออกจากสถานี",holder.itemView);
+                    }
+
+                }
+                //Finish countdown
+                public void onFinish() {
+                    holder.textTime.setText("00:00");
+                }
+            }.start();
+
+
             eachCard = mDataset.getJSONObject(position);
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
@@ -158,23 +193,7 @@ public class CardAdapter extends RecyclerView
             calendar.set(Calendar.MINUTE, minute);
             curTime = calendar.getTimeInMillis() - new Date().getTime();
 
-            new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
 
-                public void onTick(long millisUntilFinished) {
-                    curTime=millisUntilFinished;
-                    holder.textTime.setText(String.format(FORMAT,
-                            TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-
-                }
-
-                public void onFinish() {
-                    holder.textTime.setText("00:00");
-                }
-            }.start();
             myOnClickListener = new MyOnClickListener() {
                 @Override
                 public void onClick() {
@@ -187,11 +206,27 @@ public class CardAdapter extends RecyclerView
                 }
             };
 
+            notiSystem = new NotiSystem() {
+                @Override
+                public void showNotification(String text, View v) {
+                    android.app.Notification notification = new NotificationCompat.Builder(v.getContext()) // this is context
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("CampusBus")
+                            .setContentText(text)
+                            .setSound(uri)
+                            .setAutoCancel(true)
+                            .build();
+
+                    NotificationManager notificationManager = (NotificationManager)  v.getContext().getSystemService(NOTIFICATION_SERVICE);
+                    notificationManager.notify(1000, notification);
+                }
+            };
 
             rd = new ReservationDialog(eachCard);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -208,9 +243,13 @@ public class CardAdapter extends RecyclerView
     public static void onItemClick(int position, View v) {
         rd.show(fragment.getFragmentManager(), "gg");
     }
-
+        /*-----Interface-----*/
     public interface MyOnClickListener {
-        public void onClick();
+            public void onClick();
+
+    }
+    public interface NotiSystem{
+        public void showNotification(String text,View v);
     }
 
     public static long getCurTime() {

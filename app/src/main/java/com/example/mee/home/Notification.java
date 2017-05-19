@@ -69,7 +69,7 @@ public class Notification extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     stHour = true;
-                    checkNoti();
+                  //  checkNoti();
 
 
                 } else
@@ -111,7 +111,7 @@ public class Notification extends AppCompatActivity {
         min15.setChecked(stMin15);
         min5.setChecked(stMin5);
     }
-    public void checkNoti() {
+ /*   public void checkNoti() {
 
         long curTime = CardAdapter.getCurTime();
         new CountDownTimer(curTime, 1000) {
@@ -144,9 +144,9 @@ public class Notification extends AppCompatActivity {
         }.start();
     }
 
+*/
 
-
-    public void showNotification(String text) {
+  /*  public void showNotification(String text) {
         android.app.Notification notification = new NotificationCompat.Builder(this) // this is context
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("CampusBus")
@@ -157,7 +157,7 @@ public class Notification extends AppCompatActivity {
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(1000, notification);
-    }
+    }*/
 }
 
 
