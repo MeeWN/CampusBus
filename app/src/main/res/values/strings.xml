@@ -6,16 +6,20 @@
     <string name="title_activity_notification">Notification</string>
     <string name="title_activity_report">Report</string>
     <string name="spinnerFrom">MyAndroidApp</string>
-    <string name="from_prompt">Select Strat Point</string>
+    <string name="from_prompt">Select Route</string>
     <string name="to_prompt">Select End Point</string>
     <string name="time_prompt">Select Time</string>
 
 
     <string-array name="from">
-        <item>BKT</item>
-        <item>RM2</item>
-        <item>KX</item>
-        <item>RM2</item>
+        <item>BMD-BKT</item>
+        <item>BKT-BMD</item>
+        <item>RM2-BKT</item>
+        <item>BKT-RM2</item>
+        <item>KX-BKT</item>
+        <item>BKT-KX</item>
+        <item>BMD-KX</item>
+        <item>KX-BMD</item>
     </string-array>
     <string-array name="BMD">
         <item>BKT</item>

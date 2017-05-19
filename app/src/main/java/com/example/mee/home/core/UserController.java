@@ -1,12 +1,18 @@
 package com.example.mee.home.core;
 
 import android.accounts.NetworkErrorException;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.example.mee.home.Login;
+import com.example.mee.home.MainActivity;
+import com.example.mee.home.YourService;
 import com.example.mee.home.core.Model.Auth;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by aftei on 4/27/2017.
@@ -14,41 +20,41 @@ import org.json.JSONObject;
 
 public class UserController {
 
-    private String realUsername;
+    private String realUsername;//User from keybord
+    private String serverUsername;//User from Server
     private String realPassword = "";
     private String name;
     private String facuty;
     private String givenPassword;
     private String url;
     private Auth conn;
-    private JSONArray data ;
+    private JSONArray data;
 
 
-    public UserController(String username,String password)  {
+    public UserController(String username, String password) {
         this.realUsername = username;
         this.givenPassword = password;
-        this.url = "http://ebus.dreaminc.xyz/auth/"+realUsername;
+        this.url = "http://ebus.dreaminc.xyz/auth/" + realUsername;
         //http://ebus.dreaminc.xyz/auth/59130500001
         try {
             conn = new Auth(url);
-            conn.execute();
-        }
-        catch (Exception e){
+            conn.execute().get();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        this.realPassword=conn.getPassword();
-        while (realPassword==null){
-            this.realPassword=conn.getPassword();
+        this.serverUsername = conn.getUsername();
+        this.realPassword = conn.getPassword();
+        while (realPassword == null) {
+            this.realPassword = conn.getPassword();
         }
     }
 
-    public void loadUserData(){
-        JSONObject jobj =  conn.getJson();
-       try{
-           this.name = jobj.getString("name");
-           this.facuty = jobj.getString("facuty");
-       }
-        catch (Exception e){
+    public void loadUserData() {
+        JSONObject jobj = conn.getJson();
+        try {
+            this.name = jobj.getString("name");
+            this.facuty = jobj.getString("facuty");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -85,17 +91,21 @@ public class UserController {
         this.facuty = facuty;
     }
 
-    public boolean checkLogin(){
-        if(givenPassword.equals(realPassword)){
-            return true;
+    public boolean checkLogin() {
+        if (realPassword != null && serverUsername!=null) {//เช๋คว่ามีเน็ตรึป่าว
+            if (givenPassword.equals(realPassword)&&realUsername.equals(serverUsername)) {
+                return true;
+            } else {
+                return false;
+            }
         }else{
             return false;
         }
+
     }
-
-
-
-
-
 }
+
+
+
+
 

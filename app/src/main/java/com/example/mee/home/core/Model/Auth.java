@@ -20,6 +20,7 @@ public class Auth extends AsyncTask<String, Integer, Boolean> {
     private String url;
     private JSONObject jsonobj;
     private String password;
+    private String username;
 
     public Auth(String url) {
         this.url = url;
@@ -47,6 +48,7 @@ public class Auth extends AsyncTask<String, Integer, Boolean> {
                 this.json = new JSONArray(data);
                 jsonobj = new JSONObject(json.get(0).toString());
                 this.password = jsonobj.getString("password");
+                this.username = jsonobj.getString("id");
                 return true;
             }
 
@@ -65,11 +67,11 @@ public class Auth extends AsyncTask<String, Integer, Boolean> {
     public JSONObject getJson() {
         return jsonobj;
     }
-
     public void setJson(JSONArray json) {
         this.json = json;
     }
     public String getPassword(){return this.password;}
+    public String getUsername(){return this.username;}
 }
 
 

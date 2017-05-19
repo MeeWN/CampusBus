@@ -2,6 +2,7 @@ package com.example.mee.home.core;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
@@ -91,7 +92,7 @@ public class CardAdapter extends RecyclerView
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
     public static NotiSystem notiSystem;
-    static Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+    static Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     private static final String FORMAT = "%02d:%02d:%02d";
     static long curTime;
     Notification noti = new Notification();
@@ -210,7 +211,9 @@ public class CardAdapter extends RecyclerView
                 @Override
                 public void showNotification(String text, View v) {
                     android.app.Notification notification = new NotificationCompat.Builder(v.getContext()) // this is context
-                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setSmallIcon(R.drawable.bus_vehicle)
+                            .setLargeIcon(BitmapFactory.decodeResource(v.getContext().getResources(),
+                                    R.drawable.logo))
                             .setContentTitle("CampusBus")
                             .setContentText(text)
                             .setSound(uri)

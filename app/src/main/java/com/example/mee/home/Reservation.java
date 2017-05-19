@@ -3,6 +3,7 @@ package com.example.mee.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.icu.text.IDNA;
 import android.icu.text.IDNA.Info;
 import android.os.Bundle;
@@ -12,17 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.mee.home.core.Model.PostReserve;
 import java.io.Serializable;
 import java.util.ArrayList;
 import static android.R.attr.value;
 import static com.example.mee.home.R.id.spinner;
-import static com.example.mee.home.R.id.spinner2;
+
 
 public class Reservation extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private String stSpinner, stSpinner2, stSpinner3;
@@ -44,18 +47,19 @@ public class Reservation extends AppCompatActivity implements AdapterView.OnItem
         selected = "from";
         context = this;
         spinner = (Spinner) findViewById(R.id.spinner);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+       // spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner3 = (Spinner) findViewById(R.id.spinner3);
         from = getResources().getStringArray(R.array.from);
-        BMD = getResources().getStringArray(R.array.BMD);
+        /*BMD = getResources().getStringArray(R.array.BMD);
         BKT = getResources().getStringArray(R.array.BKT);
         KX = getResources().getStringArray(R.array.KX);
         RM2 = getResources().getStringArray(R.array.RM2);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,getSelected());
+
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
-        SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);*/
         Button btnSubmit = (Button) findViewById(R.id.btnReserv);
 
         //END OF SHIT
@@ -106,4 +110,5 @@ public class Reservation extends AppCompatActivity implements AdapterView.OnItem
             return from;
         }
     }
+
 }
