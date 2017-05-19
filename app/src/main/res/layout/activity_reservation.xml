@@ -20,10 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_reservation"
-        android:id="@+id/include2" />
-
-
+    <include
+        android:id="@+id/include2"
+        layout="@layout/content_reservation" />
 
 
 </android.support.design.widget.CoordinatorLayout>

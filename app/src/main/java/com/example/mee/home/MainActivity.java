@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         re.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
 
-                Intent mainIntent =new Intent(MainActivity.this,Report.class);
+                Intent mainIntent =new Intent(MainActivity.this,statistic.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(mainIntent,1);
                 return true;

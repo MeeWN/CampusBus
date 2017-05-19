@@ -43,7 +43,6 @@
     </string-array>
 
 
-
     <string-array name="time_arrays">
         <item>7:15</item>
         <item>7:30</item>
@@ -111,6 +110,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_logon">Logon</string>
     <string name="title_activity_loading">Loading</string>
+    <string name="title_activity_statistic">statistic</string>
 </resources>
 
 
