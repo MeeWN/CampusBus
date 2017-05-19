@@ -1,13 +1,18 @@
 package com.example.mee.home.core;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.mee.home.MainActivity;
+import com.example.mee.home.Notification;
 import com.example.mee.home.R;
 import com.example.mee.home.ReservationDialog;
 import org.json.JSONArray;
@@ -19,6 +24,8 @@ import android.app.Fragment;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by aftei on 5/1/2017.
@@ -73,20 +80,30 @@ import java.util.concurrent.TimeUnit;
 public class CardAdapter extends RecyclerView
         .Adapter<CardAdapter
         .DataObjectHolder> {
+
+
     private JSONArray mDataset;
-    private  JSONObject eachCard;
-    private static  String time;
+    private JSONObject eachCard;
+    private static String time;
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
     private static final String FORMAT = "%02d:%02d:%02d";
+    static long curTime;
+    Notification noti = new Notification();
 
+    public CardAdapter() {
+
+    }
+    /*CLASS */
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         TextView textDeparture;
         TextView textArrive;
         TextView textTime;
+
+
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -98,12 +115,12 @@ public class CardAdapter extends RecyclerView
             fragment = new Fragment();
 
         }
+
         @Override
         public void onClick(View v) {
             myOnClickListener.onClick();
         }
     }
-
 
 
     public CardAdapter(JSONArray myDataset) {
@@ -123,47 +140,48 @@ public class CardAdapter extends RecyclerView
     @Override
     // OnCreate Each Card
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
-        try{
+        try {
             eachCard = mDataset.getJSONObject(position);
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
             //holder.textTime.setText();
-            final String[] temp= eachCard.getString("DATETIME").split(":");
-            temp[0]=temp[0];
-            temp[1]=temp[1];
-           // temp[2]=temp[2];
-            int hour=Integer.parseInt(temp[0]);
-            int minute=Integer.parseInt(temp[1]);
+            final String[] temp = mDataset.getJSONObject(position).getString("DATETIME").split(":");
+            temp[0] = temp[0];
+            temp[1] = temp[1];
+            // temp[2]=temp[2];
+            int hour = Integer.parseInt(temp[0]);
+            int minute = Integer.parseInt(temp[1]);
             Date date = new Date();
-            Calendar calendar = Calendar.getInstance();
+            final Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
-            calendar.set(Calendar.HOUR_OF_DAY,  hour);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
             calendar.set(Calendar.MINUTE, minute);
-            final long curTime =  calendar.getTimeInMillis()-new Date().getTime();
+            curTime = calendar.getTimeInMillis() - new Date().getTime();
 
             new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
 
                 public void onTick(long millisUntilFinished) {
-
+                    curTime=millisUntilFinished;
                     holder.textTime.setText(String.format(FORMAT,
                             TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                     TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
                 }
 
                 public void onFinish() {
                     holder.textTime.setText("00:00");
                 }
             }.start();
-            myOnClickListener =new MyOnClickListener() {
+            myOnClickListener = new MyOnClickListener() {
                 @Override
                 public void onClick() {
-                    try{
+                    try {
                         rd = new ReservationDialog(mDataset.getJSONObject(position));
-                        rd.show(fragment.getFragmentManager(),"gg");
-                    }catch (Exception e){
+                        rd.show(fragment.getFragmentManager(), "gg");
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -171,10 +189,11 @@ public class CardAdapter extends RecyclerView
 
 
             rd = new ReservationDialog(eachCard);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void addItem(JSONObject dataObj, int index) {
         mDataset.put(dataObj);
@@ -186,13 +205,29 @@ public class CardAdapter extends RecyclerView
     }
 
 
-        public static void onItemClick(int position, View v){
-            rd.show(fragment.getFragmentManager(),"gg");
-        }
+    public static void onItemClick(int position, View v) {
+        rd.show(fragment.getFragmentManager(), "gg");
+    }
 
-        public interface MyOnClickListener{
-            public void onClick();
+    public interface MyOnClickListener {
+        public void onClick();
+    }
+
+    public static long getCurTime() {
+        return curTime;
     }
 
 
+   /* public void showNotification(String text) {
+        android.app.Notification notification = new NotificationCompat.Builder() // this is context
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("CampusBus")
+                .setContentText(text)
+                //  .setSound(uri)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(1000, notification);
+    }*/
 }

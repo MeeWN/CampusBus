@@ -1,6 +1,7 @@
 package com.example.mee.home;
 
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +11,15 @@ import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.mee.home.core.CardAdapter;
@@ -104,11 +108,16 @@ public class MainActivity extends AppCompatActivity {
            }
         }.start();
 */
-        FloatingActionButton plus = (FloatingActionButton) findViewById(R.id.plus);
+        final FloatingActionButton plus = (FloatingActionButton) findViewById(R.id.plus);
+        final ImageView bus = (ImageView) findViewById(R.id.bus);
+        final ImageView noti = (ImageView) findViewById(R.id.noti);
+        final ImageView report = (ImageView) findViewById(R.id.report);
+        final Animation show = AnimationUtils.loadAnimation(MainActivity.this,R.anim.show);
+        final Animation hide = AnimationUtils.loadAnimation(MainActivity.this,R.anim.hide);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle%2==0) {
+              /* if(toggle%2==0) {
                     findViewById(R.id.bus).setVisibility(View.VISIBLE);
                     findViewById(R.id.noti).setVisibility(View.VISIBLE);
                     findViewById(R.id.report).setVisibility(View.VISIBLE);
@@ -119,13 +128,30 @@ public class MainActivity extends AppCompatActivity {
                     findViewById(R.id.noti).setVisibility(View.INVISIBLE);
                     findViewById(R.id.report).setVisibility(View.INVISIBLE);
                    toggle++;
-                }
+                }*/
+              if(bus.getVisibility()==View.VISIBLE&&noti.getVisibility()==View.VISIBLE&&report.getVisibility()==View.VISIBLE){
+                  bus.setVisibility(View.GONE);
+                  noti.setVisibility(View.GONE);
+                  report.setVisibility(View.GONE);
+                  bus.startAnimation(hide);
+                  noti.startAnimation(hide);
+                  report.startAnimation(hide);
+              }else{
+                  bus.setVisibility(View.VISIBLE);
+                  noti.setVisibility(View.VISIBLE);
+                  report.setVisibility(View.VISIBLE);
+                  bus.startAnimation(show);
+                  noti.startAnimation(show);
+                  report.startAnimation(show);
+              }
             }
+
         });
 
 
 
-        ImageView bus = (ImageView) findViewById(R.id.bus);
+
+
         bus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
