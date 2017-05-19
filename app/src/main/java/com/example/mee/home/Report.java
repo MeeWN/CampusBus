@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,8 @@ public class Report extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        barChart = (BarChart) findViewById(R.id.bargraph);
+        barChart = (BarChart) findViewById(R.id.bar_chart);
+
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry(44f,0));
@@ -33,7 +35,9 @@ public class Report extends AppCompatActivity {
         barEntries.add(new BarEntry(12f,3));
         barEntries.add(new BarEntry(19f,4));
         barEntries.add(new BarEntry(91f,5));
+
         BarDataSet barDataSet = new BarDataSet(barEntries,"Dates");
+        barDataSet.setValueTextSize(8);
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +58,15 @@ public class Report extends AppCompatActivity {
         theDates.add("August");
         theDates.add("September");
 
-        ArrayList<IBarDataSet> iBarDataSet  = new ArrayList<IBarDataSet>();
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(barDataSet);
+
+        BarData data = new BarData(dataSets);
+        barChart.setData(data);
+        barChart.animateXY(3000,5000);
+
+
+        /*ArrayList<IBarDataSet> iBarDataSet  = new ArrayList<IBarDataSet>();
 
         BarDataSet dataSets = new BarDataSet(barEntries,"Entrys");
         iBarDataSet.add(dataSets);
@@ -63,7 +75,7 @@ public class Report extends AppCompatActivity {
 
         barChart.setTouchEnabled(true);
         barChart.setDragEnabled(true);
-        barChart.setScaleEnabled(true);
+        barChart.setScaleEnabled(true);*/
     }
 
 
