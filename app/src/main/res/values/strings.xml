@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home</string>
+    <string name="app_name">CampusBus</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_reservation">Reservation</string>
@@ -115,6 +115,8 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_logon">Logon</string>
     <string name="title_activity_loading">Loading</string>
+    <string name="Home">Home</string>
+    <string name="Reservation">Reservation</string>
 </resources>
 
 
