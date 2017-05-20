@@ -24,32 +24,46 @@ import com.example.mee.home.core.Model.PostReserve;
 import java.io.Serializable;
 import java.util.ArrayList;
 import static android.R.attr.value;
-import static com.example.mee.home.R.id.spinner;
+//import static com.example.mee.home.R.id.spinner;
 
 
-public class Reservation extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class Reservation extends AppCompatActivity {
     private String stSpinner, stSpinner2, stSpinner3;
     private PostReserve postReserve;
     private Spinner spinner;
     private Spinner spinner2;
     private Spinner spinner3;
+    private Spinner spinner4;
+    private Spinner spinner5;
+    private Spinner spinner6;
+    private Spinner spinner7;
+    private Spinner spinner8;
+
     private Context context;
     private String selected;
-    String[] from,BMD,BKT,KX,RM2;
+    String[] from, BMD, BKT, KX, RM2;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        selected = "from";
-        context = this;
-        spinner = (Spinner) findViewById(R.id.spinner);
-       // spinner2 = (Spinner) findViewById(R.id.spinner2);
+        //      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        selected = "from";
+        //      context = this;
+        spinner = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner3 = (Spinner) findViewById(R.id.spinner3);
-        from = getResources().getStringArray(R.array.from);
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        spinner5 = (Spinner) findViewById(R.id.spinner5);
+        spinner6 = (Spinner) findViewById(R.id.spinner6);
+        spinner7 = (Spinner) findViewById(R.id.spinner7);
+        spinner8 = (Spinner) findViewById(R.id.spinner8);
+    }
+
+
+    //   from = getResources().getStringArray(R.array.from);
         /*BMD = getResources().getStringArray(R.array.BMD);
         BKT = getResources().getStringArray(R.array.BKT);
         KX = getResources().getStringArray(R.array.KX);
@@ -60,9 +74,9 @@ public class Reservation extends AppCompatActivity implements AdapterView.OnItem
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
         SharedPreferences sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);*/
-        Button btnSubmit = (Button) findViewById(R.id.btnReserv);
-
-        //END OF SHIT
+    Button btnSubmit = (Button) findViewById(R.id.btnReserv);
+}
+    //END OF SHIT
 
 //            @Override
 //            public void onClick(View v) {
@@ -84,20 +98,21 @@ public class Reservation extends AppCompatActivity implements AdapterView.OnItem
 //        });
 //    }
 
-    }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        changeValue(parent.getItemAtPosition(position).toString());
+
+
+  /*  @Override
+   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+      changeValue(parent.getItemAtPosition(position).toString());
         selected = parent.getItemAtPosition(position).toString();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
+    }*/
 
-    public String[] getSelected(){
+    /*public String[] getSelected(){
         if (selected.equals("BMD")){
             return BMD;
         }else if (selected.equals("BKT")){
@@ -109,6 +124,6 @@ public class Reservation extends AppCompatActivity implements AdapterView.OnItem
         }else{
             return from;
         }
-    }
+    }*/
 
-}
+
