@@ -60,12 +60,6 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity
-            android:name=".core.Popup"
-            android:label="Popup"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
 
     </application>
 

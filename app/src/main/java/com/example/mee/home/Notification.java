@@ -51,19 +51,6 @@ public class Notification extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
-    /*    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         hour = (Switch) findViewById(R.id.hour);
         hour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -111,53 +98,6 @@ public class Notification extends AppCompatActivity {
         min15.setChecked(stMin15);
         min5.setChecked(stMin5);
     }
- /*   public void checkNoti() {
-
-        long curTime = CardAdapter.getCurTime();
-        new CountDownTimer(curTime, 1000) {
-            public void onTick(long millisUntilFinished) {
-
-                String.format(FORMAT,
-                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-
-                if (millisUntilFinished >= 3599000 && millisUntilFinished <= 3601000 && Notification.stHour == true) {
-                    showNotification("อีก 1 ชม.รถจะออกจากสถานี");
-                }
-                if (millisUntilFinished >= 1799000 && millisUntilFinished <= 1801000 && Notification.stMin30 == true) {
-                    showNotification("อีก 30 นาที รถจะออกจากสถานี");
-                }
-                if (millisUntilFinished >= 899000 && millisUntilFinished <= 901000 && Notification.stMin15 == true) {
-                    showNotification("อีก 15 นาที รถจะออกจากสถานี");
-                }
-                if (millisUntilFinished >= 299000 && millisUntilFinished <= 301000 && Notification.stMin5 == true) {
-                    showNotification("อีก 5 นาที รถจะออกจากสถานี");
-                }
-            }
-
-            public void onFinish() {
-
-            }
-        }.start();
-    }
-
-*/
-
-  /*  public void showNotification(String text) {
-        android.app.Notification notification = new NotificationCompat.Builder(this) // this is context
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("CampusBus")
-                .setContentText(text)
-                 .setSound(uri)
-                .setAutoCancel(true)
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(1000, notification);
-    }*/
 }
 
 
