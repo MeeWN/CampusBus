@@ -2,28 +2,35 @@ package com.example.mee.home.core;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mee.home.MainActivity;
 import com.example.mee.home.Notification;
 import com.example.mee.home.R;
 import com.example.mee.home.ReservationDialog;
+import com.example.mee.home.core.Model.Cancelation;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import android.app.Fragment;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -85,9 +92,9 @@ public class CardAdapter extends RecyclerView
         .Adapter<CardAdapter
         .DataObjectHolder> {
 
-
     private JSONArray mDataset;
     private JSONObject eachCard;
+    private ReservationDialog reservationDialog;
     private static String time;
     private static ReservationDialog rd;
     private static Fragment fragment;
@@ -108,6 +115,7 @@ public class CardAdapter extends RecyclerView
         TextView textDeparture;
         TextView textArrive;
         TextView textTime;
+        ImageButton cancleButton;
 
 
 
@@ -116,6 +124,7 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             textTime = (TextView) itemView.findViewById(R.id.textTime);
+            cancleButton = (ImageButton) itemView.findViewById(R.id.cancelButton);
             time = "20:15:00";
             itemView.setOnClickListener(this);
             fragment = new Fragment();
@@ -124,7 +133,12 @@ public class CardAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myOnClickListener.onClick(v);
+//            try {
+//                myOnClickListener.onClick(v);
+//                myOnClickListener.onCancle(v);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -178,12 +192,21 @@ public class CardAdapter extends RecyclerView
                     holder.textTime.setText("00:00");
                 }
             }.start();
-
-
+            /*END COUNTDOWN*/
             eachCard = mDataset.getJSONObject(position);
+            holder.cancleButton.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try{
+                        Cancelation cancelation = new Cancelation(eachCard.getString("id"));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }));
+            reservationDialog = new ReservationDialog(position);
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
-            //holder.textTime.setText();
             final String[] temp = mDataset.getJSONObject(position).getString("DATETIME").split(":");
             temp[0] = temp[0];
             temp[1] = temp[1];
@@ -198,18 +221,17 @@ public class CardAdapter extends RecyclerView
             curTime = calendar.getTimeInMillis() - new Date().getTime();
 
 
-            myOnClickListener = new MyOnClickListener() {
+         /*   myOnClickListener = new MyOnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    try{
-                        Activity activity =(Activity) v.getContext();
-                        ReservationDialog reservationDialog = new ReservationDialog(mDataset.getJSONObject(position));
-                        reservationDialog.show(activity.getFragmentManager(),"dialog");
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
+                public void onClick(View v) throws JSONException {
+
                 }
-            };
+
+                @Override
+                public void onCancle(View v) {
+
+                }
+            };*/
 
             notiSystem = new NotiSystem() {
                 @Override
@@ -229,7 +251,6 @@ public class CardAdapter extends RecyclerView
                 }
             };
 
-            rd = new ReservationDialog(eachCard);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -252,12 +273,14 @@ public class CardAdapter extends RecyclerView
     }
         /*-----Interface-----*/
     public interface MyOnClickListener {
-            public void onClick(View v);
+            public void onClick(View v) throws JSONException;
+            public void onCancle(View v);
 
     }
     public interface NotiSystem{
         public void showNotification(String text,View v);
     }
+
 
     public static long getCurTime() {
         return curTime;

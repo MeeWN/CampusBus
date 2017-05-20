@@ -16,17 +16,26 @@ import org.json.JSONObject;
 public class ReservationDialog extends DialogFragment{
 
     private JSONObject data;
+    private int position;
 
     public ReservationDialog() {
     }
 
-    public ReservationDialog(JSONObject data) {
-        this.data = data;
+    public ReservationDialog(int position) {
+        this.position = position;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.trip_doalog,null);
+    }
+
+    public void setData(JSONObject data){
+        this.data = data;
+    }
+
+    public int getPosition(){
+        return position;
     }
 }
