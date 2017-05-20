@@ -31,7 +31,7 @@ public class PostReserve extends AsyncTask<String, Void, Boolean> {
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("PASSENGER_ID", stdId));
-        params.add(new BasicNameValuePair("TIMETABLE_ID", "1"));
+        params.add(new BasicNameValuePair("TIMETABLE_ID", routeId));
 
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(params));

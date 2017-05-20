@@ -1,15 +1,10 @@
 package com.example.mee.home.core;
 
-import android.app.Activity;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,52 +37,6 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by aftei on 5/1/2017.
  */
 
-// Provide a reference to the views for each data item
-// Complex data items may need more than one view per item, and
-// you provide access to all the views for a data item in a view holder
-//public static class ViewHolder extends RecyclerView.ViewHolder {
-//    // each data item is just a string in this case
-//    public TextView mTextView;
-//    public ViewHolder(TextView v) {
-//        super(v);
-//        mTextView = v;
-//    }
-//}
-//
-//    // Provide a suitable constructor (depends on the kind of dataset)
-//    public MyAdapter(String[] myDataset) {
-//        mDataset = myDataset;
-//    }
-//
-//    // Create new views (invoked by the layout manager)
-//    @Override
-//    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-//        // create a new view
-//        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.card_reservation, parent, false);
-//        // set the view's size, margins, paddings and layout parameters
-//        ViewHolder vh = new ViewHolder(v);
-//        return vh;
-//    }
-//
-//    // Replace the contents of a view (invoked by the layout manager)
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position) {
-//        // - get element from your dataset at this position
-//        // - replace the contents of the view with that element
-//        holder.mTextView.setText(mDataset[position]);
-//
-//    }
-//
-//    // Return the size of your dataset (invoked by the layout manager)
-//    @Override
-//    public int getItemCount() {
-//        return mDataset.length;
-//    }
-//}
-    /*Activity activity =(Activity) v.getContext();
-            ReservationDialog reservationDialog = new ReservationDialog();
-            reservationDialog.show(activity.getFragmentManager(),"dialog");*/
 public class CardAdapter extends RecyclerView
         .Adapter<CardAdapter
         .DataObjectHolder> {
@@ -108,6 +57,7 @@ public class CardAdapter extends RecyclerView
     public CardAdapter() {
 
     }
+
     /*CLASS */
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -116,7 +66,6 @@ public class CardAdapter extends RecyclerView
         TextView textArrive;
         TextView textTime;
         ImageButton cancleButton;
-
 
 
         public DataObjectHolder(View itemView) {
@@ -133,12 +82,7 @@ public class CardAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-//            try {
-//                myOnClickListener.onClick(v);
-//                myOnClickListener.onCancle(v);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+
         }
     }
 
@@ -166,7 +110,7 @@ public class CardAdapter extends RecyclerView
             //Countdown
             new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
                 public void onTick(long millisUntilFinished) {
-                    curTime=millisUntilFinished;
+                    curTime = millisUntilFinished;
                     holder.textTime.setText(String.format(FORMAT,
                             TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
@@ -174,19 +118,20 @@ public class CardAdapter extends RecyclerView
                             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
                     if (millisUntilFinished >= 3599000 && millisUntilFinished <= 3601000 && Notification.stHour == true) {
-                        notiSystem.showNotification("อีก 1 ชม.รถจะออกจากสถานี",holder.itemView);
+                        notiSystem.showNotification("อีก 1 ชม.รถจะออกจากสถานี", holder.itemView);
                     }
                     if (millisUntilFinished >= 1799000 && millisUntilFinished <= 1801000 && Notification.stMin30 == true) {
-                        notiSystem.showNotification("อีก 30 นาทีรถจะออกจากสถานี",holder.itemView);
+                        notiSystem.showNotification("อีก 30 นาทีรถจะออกจากสถานี", holder.itemView);
                     }
                     if (millisUntilFinished >= 899000 && millisUntilFinished <= 901000 && Notification.stMin15 == true) {
-                        notiSystem.showNotification("อีก 15 นาทีรถจะออกจากสถานี",holder.itemView);
+                        notiSystem.showNotification("อีก 15 นาทีรถจะออกจากสถานี", holder.itemView);
                     }
                     if (millisUntilFinished >= 299000 && millisUntilFinished <= 301000 && Notification.stMin5 == true) {
-                        notiSystem.showNotification("อีก 5 นาทีรถจะออกจากสถานี",holder.itemView);
+                        notiSystem.showNotification("อีก 5 นาทีรถจะออกจากสถานี", holder.itemView);
                     }
 
                 }
+
                 //Finish countdown
                 public void onFinish() {
                     holder.textTime.setText("00:00");
@@ -197,9 +142,9 @@ public class CardAdapter extends RecyclerView
             holder.cancleButton.setOnClickListener((new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try{
+                    try {
                         Cancelation cancelation = new Cancelation(eachCard.getString("id"));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -220,19 +165,6 @@ public class CardAdapter extends RecyclerView
             calendar.set(Calendar.MINUTE, minute);
             curTime = calendar.getTimeInMillis() - new Date().getTime();
 
-
-         /*   myOnClickListener = new MyOnClickListener() {
-                @Override
-                public void onClick(View v) throws JSONException {
-
-                }
-
-                @Override
-                public void onCancle(View v) {
-
-                }
-            };*/
-
             notiSystem = new NotiSystem() {
                 @Override
                 public void showNotification(String text, View v) {
@@ -246,7 +178,7 @@ public class CardAdapter extends RecyclerView
                             .setAutoCancel(true)
                             .build();
 
-                    NotificationManager notificationManager = (NotificationManager)  v.getContext().getSystemService(NOTIFICATION_SERVICE);
+                    NotificationManager notificationManager = (NotificationManager) v.getContext().getSystemService(NOTIFICATION_SERVICE);
                     notificationManager.notify(1000, notification);
                 }
             };
@@ -271,14 +203,17 @@ public class CardAdapter extends RecyclerView
     public static void onItemClick(int position, View v) {
         rd.show(fragment.getFragmentManager(), "gg");
     }
-        /*-----Interface-----*/
+
+    /*-----Interface-----*/
     public interface MyOnClickListener {
-            public void onClick(View v) throws JSONException;
-            public void onCancle(View v);
+        public void onClick(View v) throws JSONException;
+
+        public void onCancle(View v);
 
     }
-    public interface NotiSystem{
-        public void showNotification(String text,View v);
+
+    public interface NotiSystem {
+        public void showNotification(String text, View v);
     }
 
 
@@ -286,112 +221,4 @@ public class CardAdapter extends RecyclerView
         return curTime;
     }
 
-
-   /* public void showNotification(String text) {
-        android.app.Notification notification = new NotificationCompat.Builder() // this is context
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("CampusBus")
-                .setContentText(text)
-                //  .setSound(uri)
-                .setAutoCancel(true)
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(1000, notification);
-    }*/
 }
-/*package com.example.mee.home.core;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.mee.home.R;
-import com.example.mee.home.ReservationDialog;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class CardAdapter
-    private JSONArray mDataset;
-    private static MyOnclickListener myOnclickListener;
-
-    public static class DataObjectHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
-        TextView textDeparture;
-        TextView textArrive;
-
-        public DataObjectHolder(View itemView) {
-            super(itemView);
-            textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
-            textArrive = (TextView) itemView.findViewById(R.id.textArrive);
-            itemView.setOnClickListener(this);
-        }
-        @Override
-        public void onClick(View v) {
-            myOnclickListener.onClick(v);
-        }
-    }
-
-
-
-    public CardAdapter(JSONArray myDataset) {
-        mDataset = myDataset;
-    }
-
-    @Override
-    public DataObjectHolder onCreateViewHolder(ViewGroup parent,
-                                               int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_reservation, parent, false);
-
-        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
-        return dataObjectHolder;
-    }
-
-    @Override
-    // OnCreate Each Card
-    public void onBindViewHolder(DataObjectHolder holder, final int position) {
-        try{
-            holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
-            holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
-            myOnclickListener =new MyOnclickListener() {
-                @Override
-                public void onClick(View v) {
-                    try{
-                        Activity activity =(Activity) v.getContext();
-                        ReservationDialog reservationDialog = new ReservationDialog(mDataset.getJSONObject(position));
-                        reservationDialog.show(activity.getFragmentManager(),"dialog");
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }
-            };
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void addItem(JSONObject dataObj, int index) {
-        mDataset.put(dataObj);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDataset.length();
-    }
-
-    public interface MyOnclickListener{
-        public void onClick(View v);
-
-    }
-
-}
-*/
