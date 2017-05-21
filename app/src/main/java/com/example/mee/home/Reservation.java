@@ -9,6 +9,7 @@ import android.icu.text.IDNA.Info;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -52,6 +53,15 @@ public class Reservation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+        Button ok = (Button) findViewById(R.id.okBt);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reserve(routeId);
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+            }
+        });
         sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         Spinner[] spinners = new Spinner[8];
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -95,7 +105,7 @@ public class Reservation extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String name = spinner1.getSelectedItem().toString();
                 if (name != "00:00") {
-                    spinner1.setEnabled(false);
+                   // spinner1.setEnabled(false);
                     spinner2.setEnabled(false);
                     spinner3.setEnabled(false);
                     spinner4.setEnabled(false);
@@ -123,7 +133,7 @@ public class Reservation extends AppCompatActivity {
                 String name = spinner2.getSelectedItem().toString();
                 if (name != "00:00") {
                     spinner1.setEnabled(false);
-                    spinner2.setEnabled(false);
+                 //   spinner2.setEnabled(false);
                     spinner3.setEnabled(false);
                     spinner4.setEnabled(false);
                     spinner5.setEnabled(false);
@@ -150,7 +160,7 @@ public class Reservation extends AppCompatActivity {
                 if (name != "00:00") {
                     spinner1.setEnabled(false);
                     spinner2.setEnabled(false);
-                    spinner3.setEnabled(false);
+                   // spinner3.setEnabled(false);
                     spinner4.setEnabled(false);
                     spinner5.setEnabled(false);
                     spinner6.setEnabled(false);
@@ -177,7 +187,7 @@ public class Reservation extends AppCompatActivity {
                     spinner1.setEnabled(false);
                     spinner2.setEnabled(false);
                     spinner3.setEnabled(false);
-                    spinner4.setEnabled(false);
+                  //  spinner4.setEnabled(false);
                     spinner5.setEnabled(false);
                     spinner6.setEnabled(false);
                     spinner7.setEnabled(false);
@@ -204,7 +214,7 @@ public class Reservation extends AppCompatActivity {
                     spinner2.setEnabled(false);
                     spinner3.setEnabled(false);
                     spinner4.setEnabled(false);
-                    spinner5.setEnabled(false);
+                 //   spinner5.setEnabled(false);
                     spinner6.setEnabled(false);
                     spinner7.setEnabled(false);
                     spinner8.setEnabled(false);
@@ -231,7 +241,7 @@ public class Reservation extends AppCompatActivity {
                     spinner3.setEnabled(false);
                     spinner4.setEnabled(false);
                     spinner5.setEnabled(false);
-                    spinner6.setEnabled(false);
+                 //   spinner6.setEnabled(false);
                     spinner7.setEnabled(false);
                     spinner8.setEnabled(false);
                     selectRoute = "6";
@@ -258,7 +268,7 @@ public class Reservation extends AppCompatActivity {
                     spinner4.setEnabled(false);
                     spinner5.setEnabled(false);
                     spinner6.setEnabled(false);
-                    spinner7.setEnabled(false);
+                 //   spinner7.setEnabled(false);
                     spinner8.setEnabled(false);
                     selectRoute = "7";
                     selectTime = name;
@@ -285,7 +295,7 @@ public class Reservation extends AppCompatActivity {
                     spinner5.setEnabled(false);
                     spinner6.setEnabled(false);
                     spinner7.setEnabled(false);
-                    spinner8.setEnabled(false);
+                 //   spinner8.setEnabled(false);
                     selectRoute = "8";
                     selectTime = name;
                     findRoute();
@@ -304,193 +314,193 @@ public class Reservation extends AppCompatActivity {
             if (this.selectTime != null) {
                 if (selectRoute.equals("1") && selectTime.equals("07:15")) {
                     routeId = "1";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("07:30")) {
                     routeId = "36";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("20:00")) {
                     routeId = "32";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("16:00")) {
                     routeId = "64";
                     reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("19:00")) {
                     routeId = "30";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("12:00")) {
                     routeId = "50";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("18:00")) {
                     routeId = "28";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("12:30")) {
                     routeId = "53";
-                    reserve(routeId);
+                  //  reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("14:00")) {
                     routeId = "57";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("15:00")) {
                     routeId = "61";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("17:00")) {
                     routeId = "24";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("07:15")) {
                     routeId = "1";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("13:00")) {
                     routeId = "56";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("12:00")) {
                     routeId = "72";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("11:00")) {
                     routeId = "10";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("08:30")) {
                     routeId = "40";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("10:00")) {
                     routeId = "8";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("08:30")) {
                     routeId = "41";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("09:30")) {
                     routeId = "6";
-                    reserve(routeId);
+                  //  reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("09:00")) {
                     routeId = "5";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("08:30")) {
                     routeId = "4";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("1") && selectTime.equals("08:00")) {
                     routeId = "3";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("16:30")) {
                     routeId = "23";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("12:00")) {
                     routeId = "73";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("20:30")) {
                     routeId = "33";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("16:00")) {
                     routeId = "20";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("11:00")) {
                     routeId = "49";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("12:00")) {
                     routeId = "51";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("08:00")) {
                     routeId = "37";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("13:00")) {
                     routeId = "55";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("14:00")) {
                     routeId = "58";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("15:00")) {
                     routeId = "62";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("17:30")) {
                     routeId = "26";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("07:30")) {
                     routeId = "2";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("18:00")) {
                     routeId = "68";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("16:00")) {
                     routeId = "20";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("16:30")) {
                     routeId = "23";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("20:00")) {
                     routeId = "71";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("17:00")) {
                     routeId = "66";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("19:30")) {
                     routeId = "31";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("20:30")) {
                     routeId = "33";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("2") && selectTime.equals("08:30")) {
                     routeId = "42";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("3") && selectTime.equals("08:00")) {
                     routeId = "38";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("3") && selectTime.equals("09:00")) {
                     routeId = "46";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("3") && selectTime.equals("08:30")) {
                     routeId = "44";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("4") && selectTime.equals("18:00")) {
                     routeId = "69";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("4") && selectTime.equals("17:00")) {
                     routeId = "67";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("12:00")) {
                     routeId = "52";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("08:00")) {
                     routeId = "39";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("16:10")) {
                     routeId = "22";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("11:20")) {
                     routeId = "11";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("14:50")) {
                     routeId = "60";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("08:30")) {
                     routeId = "43";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("16:10")) {
                     routeId = "22";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("5") && selectTime.equals("15:20")) {
                     routeId = "65";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("10:15")) {
                     routeId = "9";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("09:50")) {
                     routeId = "7";
-                    reserve(routeId);
+                  //  reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("17:15")) {
                     routeId = "25";
-                    reserve(routeId);
+                  //  reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("15:00")) {
                     routeId = "63";
-                    reserve(routeId);
+                //    reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("17:50")) {
                     routeId = "27";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("14:00")) {
                     routeId = "59";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("18:30")) {
                     routeId = "29";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 } else if (selectRoute.equals("6") && selectTime.equals("09:30")) {
                     routeId = "47";
-                    reserve(routeId);
+                 //   reserve(routeId);
                 }
             }
         }
@@ -498,9 +508,13 @@ public class Reservation extends AppCompatActivity {
         public void reserve(String x) {
                 postReserve = new PostReserve(sharedpf.getString("username", "59130500001"), x);
                 postReserve.execute("http://ebus.dreaminc.xyz/reserve/save");
-            Intent mainIntent = new Intent(Reservation.this, MainActivity.class);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reservation.this);
+                builder.setMessage("จองเรียบร้อยแล้ว");
+                builder.show();
+
+              /*  Intent mainIntent = new Intent(Reservation.this, MainActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(mainIntent, 1);
+                startActivityForResult(mainIntent, 1);*/
             }
         }
     //On Create

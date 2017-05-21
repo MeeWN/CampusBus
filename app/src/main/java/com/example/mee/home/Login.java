@@ -66,11 +66,11 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-    public void cancel() {
+  /*  public void cancel() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
         builder.setMessage("รหัสนะกศึกษาหรือPasswordผิดพลาด");
         builder.show();
-    }
+    }*/
 }
 
 

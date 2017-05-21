@@ -1,5 +1,6 @@
 package com.example.mee.home.core;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.mee.home.MainActivity;
 import com.example.mee.home.Notification;
 import com.example.mee.home.R;
+import com.example.mee.home.Reservation;
 import com.example.mee.home.ReservationDialog;
 import com.example.mee.home.core.Model.Cancelation;
 
@@ -82,7 +84,11 @@ public class CardAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-
+            try {
+                myOnClickListener.onClick(v);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -139,17 +145,25 @@ public class CardAdapter extends RecyclerView
             }.start();
             /*END COUNTDOWN*/
             eachCard = mDataset.getJSONObject(position);
-            holder.cancleButton.setOnClickListener((new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Cancelation cancelation = new Cancelation(eachCard.getString("id"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
+//            holder.cancleButton.setOnClickListener((new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    try {
+//                        Cancelation cancelation = new Cancelation(eachCard.getString("id"));
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }));
             reservationDialog = new ReservationDialog(position);
+            myOnClickListener = new MyOnClickListener() {
+                @Override
+                public void onClick(View v) throws JSONException {
+                    Activity activity = (Activity) v.getContext();
+                    int x = position;
+                    reservationDialog.show(activity.getFragmentManager(),"Dialog");
+                }
+            };
             holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
             holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
             final String[] temp = mDataset.getJSONObject(position).getString("DATETIME").split(":");
@@ -207,8 +221,6 @@ public class CardAdapter extends RecyclerView
     /*-----Interface-----*/
     public interface MyOnClickListener {
         public void onClick(View v) throws JSONException;
-
-        public void onCancle(View v);
 
     }
 

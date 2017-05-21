@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private JSONArray dataSet;
     private JSONObject dataobj;
     private String username;
-    private DBHelper helper;
+   // private DBHelper helper;
     private android.app.FragmentManager fragmentManager;
     private Fragment fragment;
     int seconds , minutes;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        helper= new DBHelper(this);
+      //  helper= new DBHelper(this);
         sharedpf = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         viewName = (TextView)findViewById(R.id.viewName);
         viewUsername = (TextView)findViewById(R.id.viewUsername);

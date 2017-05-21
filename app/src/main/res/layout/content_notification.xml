@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEEB98"
+    android:background="@color/cardview_light_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.mee.home.Notification"
     tools:showIn="@layout/activity_notification">
@@ -15,12 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="1  Hour"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/hour"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
 
     <Switch
         android:id="@+id/hour"
@@ -28,11 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.76" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
 
     <TextView
         android:id="@+id/textView6"
@@ -40,11 +41,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="30 Minute"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/min30"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Switch
         android:id="@+id/min30"
@@ -52,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/min15"
-        app:layout_constraintTop_toBottomOf="@+id/hour"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintLeft_toRightOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.52" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hour" />
 
     <TextView
         android:id="@+id/textView7"
@@ -63,12 +65,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="15 Minute"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.53999996"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/min15"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.53999996" />
 
     <Switch
         android:id="@+id/min15"
@@ -76,9 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/min5"
-        app:layout_constraintTop_toBottomOf="@+id/min30"
+        app:layout_constraintLeft_toRightOf="@+id/textView7"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/min30" />
 
     <TextView
         android:id="@+id/textView8"
@@ -86,11 +89,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="5 Minute"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintRight_toLeftOf="@+id/min5" />
+        app:layout_constraintRight_toLeftOf="@+id/min5"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
         android:id="@+id/min5"
@@ -98,21 +102,21 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/min15"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintLeft_toRightOf="@+id/textView8"
-        app:layout_constraintHorizontal_bias="0.52" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/min15" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="58dp"
         android:layout_height="62dp"
-        app:srcCompat="@drawable/alarm_clock"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035"
-        app:layout_constraintHorizontal_bias="0.095" />
+        app:srcCompat="@drawable/alarm_clock" />
 
 </android.support.constraint.ConstraintLayout>
