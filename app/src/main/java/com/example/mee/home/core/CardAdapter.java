@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,6 @@ public class CardAdapter extends RecyclerView
     private JSONArray mDataset;
     private JSONObject eachCard;
     private ReservationDialog reservationDialog;
-    private static String time;
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
@@ -75,7 +75,6 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             textTime = (TextView) itemView.findViewById(R.id.textTime);
-            time = "20:15:00";
             itemView.setOnClickListener(this);
             fragment = new Fragment();
 
@@ -113,9 +112,25 @@ public class CardAdapter extends RecyclerView
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         try {
             //Countdown
+            eachCard = mDataset.getJSONObject(position);
+            holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
+            holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
+            final String[] temp = mDataset.getJSONObject(position).getString("DATETIME").split(":");
+//            temp[0] = temp[0];
+//            temp[1] = temp[1];
+            // temp[2]=temp[2];
+            int hour = Integer.parseInt(temp[0]);
+            int minute = Integer.parseInt(temp[1]);
+            Date date = new Date();
+            final Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+            curTime = calendar.getTimeInMillis() - new Date().getTime();
+            Log.d("CurTime", "Time man: "+curTime);
+
             new CountDownTimer(curTime, 1000) { // adjust the milli seconds here
                 public void onTick(long millisUntilFinished) {
-                    curTime = millisUntilFinished;
                     holder.textTime.setText(String.format(FORMAT,
                             TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
@@ -143,7 +158,7 @@ public class CardAdapter extends RecyclerView
                 }
             }.start();
             /*END COUNTDOWN*/
-            eachCard = mDataset.getJSONObject(position);
+
 //            holder.cancleButton.setOnClickListener((new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -163,20 +178,6 @@ public class CardAdapter extends RecyclerView
                     reservationDialog.show(activity.getFragmentManager(),"Dialog");
                 }
             };
-            holder.textArrive.setText(mDataset.getJSONObject(position).getString("ARRIVE"));
-            holder.textDeparture.setText(mDataset.getJSONObject(position).getString("DEPART"));
-            final String[] temp = mDataset.getJSONObject(position).getString("DATETIME").split(":");
-            temp[0] = temp[0];
-            temp[1] = temp[1];
-            // temp[2]=temp[2];
-            int hour = Integer.parseInt(temp[0]);
-            int minute = Integer.parseInt(temp[1]);
-            Date date = new Date();
-            final Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.set(Calendar.HOUR_OF_DAY, hour);
-            calendar.set(Calendar.MINUTE, minute);
-            curTime = calendar.getTimeInMillis() - new Date().getTime();
 
             notiSystem = new NotiSystem() {
                 @Override
