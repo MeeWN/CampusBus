@@ -38,8 +38,8 @@ public class ReservationDialog extends DialogFragment{
         try{
             dialog_from.setText(coverRoute(data.getString("DEPART")));
             dialog_to.setText(coverRoute(data.getString("ARRIVE")));
-            text_bus.setText(coverRoute(data.getString("DATETIME")));
-            text_Time.setText(coverRoute(data.getString("TYPE")));
+            text_bus.setText(convertType(data.getString("TYPE")));
+            text_Time.setText(data.getString("TIMEDATE"));
         }catch (Exception e){
             e.getStackTrace();
         }
@@ -63,7 +63,20 @@ public class ReservationDialog extends DialogFragment{
             case "RM2":
                 return "Lotus Rama2";
             case "KX":
-                return " Knowledge Exchange (Wong Wian Yai)";
+                return "Knowledge Exchange";
+        }
+        return null;
+    }
+
+    public String convertType(String in){
+        switch (in){
+            case "1":
+                return "B";
+            case "2":
+                return "B2";
+            case "3":
+                return "V";
+
         }
         return null;
     }
