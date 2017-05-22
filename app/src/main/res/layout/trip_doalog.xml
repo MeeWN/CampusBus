@@ -98,9 +98,9 @@
             android:text="B2"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="@+id/imageView16"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="33dp"
             app:layout_constraintLeft_toRightOf="@+id/textView23"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginLeft="21dp" />
 
         <TextView
             android:id="@+id/textView27"
