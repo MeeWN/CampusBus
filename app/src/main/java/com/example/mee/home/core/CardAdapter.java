@@ -85,7 +85,7 @@ public class CardAdapter extends RecyclerView
         @Override
         public void onClick(View v) {
             try {
-                myOnClickListener.onClick(v);
+                myOnClickListener.onClick(v,this.getAdapterPosition());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -158,9 +158,9 @@ public class CardAdapter extends RecyclerView
             reservationDialog = new ReservationDialog(position);
             myOnClickListener = new MyOnClickListener() {
                 @Override
-                public void onClick(View v) throws JSONException {
+                public void onClick(View v,int position) throws JSONException {
                     Activity activity = (Activity) v.getContext();
-                    int x = position;
+                    reservationDialog.setData(mDataset.getJSONObject(position));
                     reservationDialog.show(activity.getFragmentManager(),"Dialog");
                 }
             };
@@ -220,7 +220,7 @@ public class CardAdapter extends RecyclerView
 
     /*-----Interface-----*/
     public interface MyOnClickListener {
-        public void onClick(View v) throws JSONException;
+        public void onClick(View v,int position) throws JSONException;
 
     }
 

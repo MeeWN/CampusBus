@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -17,6 +18,7 @@ public class ReservationDialog extends DialogFragment{
 
     private JSONObject data;
     private int position;
+    private TextView dialog_from,dialog_to,text_bus,text_Time;
 
     public ReservationDialog() {
     }
@@ -28,7 +30,20 @@ public class ReservationDialog extends DialogFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.trip_doalog,null);
+        View rootView =  inflater.inflate(R.layout.trip_doalog,null);
+        dialog_from =(TextView)  rootView.findViewById(R.id.dialog_from);
+        dialog_to = (TextView) rootView.findViewById(R.id.dialog_to);
+        text_bus = (TextView) rootView.findViewById(R.id.text_bus);
+        text_Time = (TextView) rootView.findViewById(R.id.text_time);
+        try{
+            dialog_from.setText(coverRoute(data.getString("DEPART")));
+            dialog_to.setText(coverRoute(data.getString("ARRIVE")));
+            text_bus.setText(coverRoute(data.getString("DATETIME")));
+            text_Time.setText(coverRoute(data.getString("TYPE")));
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+        return  rootView;
     }
 
     public void setData(JSONObject data){
@@ -37,5 +52,19 @@ public class ReservationDialog extends DialogFragment{
 
     public int getPosition(){
         return position;
+    }
+
+    public String coverRoute(String in){
+        switch (in){
+            case "BKT":
+                return "KMUTT Bangkhuntien";
+            case "BMD":
+                return "KMUTT Bangmod";
+            case "RM2":
+                return "Lotus Rama2";
+            case "KX":
+                return " Knowledge Exchange (Wong Wian Yai)";
+        }
+        return null;
     }
 }
