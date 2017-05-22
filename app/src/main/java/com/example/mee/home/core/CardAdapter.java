@@ -75,7 +75,6 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             textTime = (TextView) itemView.findViewById(R.id.textTime);
-            cancleButton = (ImageButton) itemView.findViewById(R.id.cancelButton);
             time = "20:15:00";
             itemView.setOnClickListener(this);
             fragment = new Fragment();

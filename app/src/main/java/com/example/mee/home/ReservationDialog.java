@@ -38,8 +38,8 @@ public class ReservationDialog extends DialogFragment{
         try{
             dialog_from.setText(coverRoute(data.getString("DEPART")));
             dialog_to.setText(coverRoute(data.getString("ARRIVE")));
-            text_bus.setText(convertType(data.getString("TYPE")));
-            text_Time.setText(data.getString("TIMEDATE"));
+            text_bus.setText(data.getString("TYPE"));
+            text_Time.setText(data.getString("DATETIME"));
         }catch (Exception e){
             e.getStackTrace();
         }
