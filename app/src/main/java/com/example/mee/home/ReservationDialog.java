@@ -6,7 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.mee.home.core.Model.*;
+import com.example.mee.home.core.Model.Report;
 
 import org.json.JSONObject;
 
@@ -19,7 +23,8 @@ public class ReservationDialog extends DialogFragment{
     private JSONObject data;
     private int position;
     private TextView dialog_from,dialog_to,text_bus,text_Time;
-
+    private Button cancelButton;
+    private com.example.mee.home.core.Model.Report report;
     public ReservationDialog() {
     }
 
@@ -35,6 +40,13 @@ public class ReservationDialog extends DialogFragment{
         dialog_to = (TextView) rootView.findViewById(R.id.dialog_to);
         text_bus = (TextView) rootView.findViewById(R.id.text_bus);
         text_Time = (TextView) rootView.findViewById(R.id.text_time);
+        cancelButton = (Button) rootView.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         try{
             dialog_from.setText(coverRoute(data.getString("DEPART")));
             dialog_to.setText(coverRoute(data.getString("ARRIVE")));

@@ -18,23 +18,23 @@
         android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
+        app:layout_constraintBottom_toTopOf="@+id/Report"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/Report"
         android:layout_width="270dp"
         android:layout_height="261dp"
         android:background="#ECF0F1"
         android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/report_button"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/report_button"
         android:layout_width="93dp"
         android:layout_height="46dp"
         android:text="Report"

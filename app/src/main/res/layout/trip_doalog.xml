@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.996"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/cancelButton"
             app:layout_constraintRight_toLeftOf="@+id/text_time"
             android:layout_marginRight="94dp" />
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:text="Depart:"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/cancelButton"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/dialog_to"
             app:layout_constraintVertical_bias="0.314"
@@ -127,10 +127,10 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/dialog_to"
             app:layout_constraintVertical_bias="0.625"
-            app:layout_constraintBottom_toTopOf="@+id/button4" />
+            app:layout_constraintBottom_toTopOf="@+id/cancelButton" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/cancelButton"
             style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

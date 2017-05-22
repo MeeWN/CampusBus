@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -50,7 +51,7 @@ public class CardAdapter extends RecyclerView
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
-    public static NotiSystem notiSystem;
+    private static NotiSystem notiSystem;
     static Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     private static final String FORMAT = "%02d:%02d:%02d";
     static long curTime;
@@ -67,7 +68,7 @@ public class CardAdapter extends RecyclerView
         TextView textDeparture;
         TextView textArrive;
         TextView textTime;
-        ImageButton cancleButton;
+        Button cancelButton;
 
 
         public DataObjectHolder(View itemView) {
@@ -75,9 +76,9 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             textTime = (TextView) itemView.findViewById(R.id.textTime);
+            cancelButton = (Button) itemView.findViewById(R.id.cancelButton);
             itemView.setOnClickListener(this);
             fragment = new Fragment();
-
         }
 
         @Override
@@ -88,6 +89,7 @@ public class CardAdapter extends RecyclerView
                 e.printStackTrace();
             }
         }
+
     }
 
     /*----END-STATIC Class -----*/
@@ -226,6 +228,10 @@ public class CardAdapter extends RecyclerView
 
     public interface NotiSystem {
         public void showNotification(String text, View v);
+    }
+
+    public interface Cancelation{
+        public void onCancel(int position);
     }
 
 
