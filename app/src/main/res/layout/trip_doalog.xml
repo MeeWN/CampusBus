@@ -33,7 +33,8 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/cancelButton"
             app:layout_constraintRight_toLeftOf="@+id/text_time"
-            android:layout_marginRight="94dp" />
+            android:layout_marginRight="94dp"
+            android:layout_marginEnd="94dp" />
 
         <ImageView
             android:id="@+id/imageView14"
@@ -89,7 +90,8 @@
             android:layout_marginLeft="58dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView16"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="58dp" />
 
         <TextView
             android:id="@+id/text_bus"
@@ -100,7 +102,8 @@
             app:layout_constraintTop_toTopOf="@+id/imageView16"
             android:layout_marginTop="33dp"
             app:layout_constraintLeft_toRightOf="@+id/textView23"
-            android:layout_marginLeft="21dp" />
+            android:layout_marginLeft="21dp"
+            android:layout_marginStart="21dp" />
 
         <TextView
             android:id="@+id/textView27"
@@ -113,7 +116,8 @@
             app:layout_constraintTop_toBottomOf="@+id/dialog_to"
             app:layout_constraintVertical_bias="0.314"
             android:layout_marginRight="102dp"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="102dp" />
 
         <TextView
             android:id="@+id/text_time"
@@ -134,13 +138,12 @@
             style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="148dp"
             android:layout_marginTop="87dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Cancel "
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dialog_to"
-            android:layout_marginEnd="148dp" />
+            app:layout_constraintLeft_toLeftOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -55,6 +55,8 @@ public class Reservation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Button ok = (Button) findViewById(R.id.okBt);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,7 +4,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_reservation">Reservation</string>
     <string name="title_activity_notification">Notification</string>
-    <string name="title_activity_report">Statistics</string>
+    <string name="title_activity_report">Report</string>
     <string name="spinnerFrom">MyAndroidApp</string>
     <string name="from_prompt">Select Route</string>
     <string name="to_prompt">Select End Point</string>

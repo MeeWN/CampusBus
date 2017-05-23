@@ -32,11 +32,11 @@ public class Report extends AppCompatActivity {
         setContentView(R.layout.activity_report);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        text_report = (TextView) findViewById(R.id.Report);
-        button = (Button) findViewById(R.id.button);
+        text_report = (TextView) findViewById(R.id.editText);
+        button = (Button) findViewById(R.id.report_button);
         shPreference = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userName = shPreference.getString("username","unknown");
-        report = new com.example.mee.home.core.Model.Report(userName,text_report.getText().toString());
+
         button.setOnClickListener(new View.OnClickListener() {
             /*
             *
@@ -46,7 +46,9 @@ public class Report extends AppCompatActivity {
             */
             @Override
             public void onClick(View v) {
-                report.execute("http://ebus.dreaminc.xyz/report"); //Send PostRequest
+                report = new com.example.mee.home.core.Model.Report(userName,text_report.getText().toString());
+                report.setUrl("http://ebus.dreaminc.xyz/report");
+                report.execute(); //Send PostRequest
                 AlertDialog.Builder builder = new AlertDialog.Builder(Report.this);
                 builder.setMessage("Thankyou for your feedback :)");
                 builder.show();

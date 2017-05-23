@@ -20,17 +20,22 @@ import java.util.List;
 public class Report  extends AsyncTask<String, Void, Boolean> {
     private String id;
     private String report;
+    private String url;
 
     public Report(String id,String report){
         this.id = id;
         this.report = report;
     }
+
+    public void setUrl(String url){
+        this.url = url;
+    }
+
     @Override
     protected Boolean doInBackground(String... urlIn) {
         boolean process =false;
-        String url = urlIn[0];
         HttpClient client = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(url);
+        HttpPost httpPost = new HttpPost(this.url);
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("PASSENGER_ID", id));

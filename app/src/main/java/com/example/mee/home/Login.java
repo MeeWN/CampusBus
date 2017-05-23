@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
                     sharedpfEditor.putString("facuty", controller.getFacuty());
                     sharedpfEditor.commit();
                     AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                    builder.setMessage("ยินดีต้อนรับเข้าสู่ระบบ");
+                    builder.setMessage("Login Pass :)");
                     builder.show();
                     Intent mainIntent = new Intent(Login.this, MainActivity.class);
                     mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity {
 
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                       builder.setMessage("IDหรือPasswordผิดพลาด");
+                       builder.setMessage("ID or Password is Invalid");
                        builder.show();
 
                 }

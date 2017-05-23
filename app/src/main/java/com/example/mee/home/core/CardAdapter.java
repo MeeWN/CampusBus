@@ -48,6 +48,7 @@ public class CardAdapter extends RecyclerView
     private JSONArray mDataset;
     private JSONObject eachCard;
     private ReservationDialog reservationDialog;
+    private Cancelation cancelation;
     private static ReservationDialog rd;
     private static Fragment fragment;
     private static MyOnClickListener myOnClickListener;
@@ -76,7 +77,6 @@ public class CardAdapter extends RecyclerView
             textDeparture = (TextView) itemView.findViewById(R.id.textDeparture);
             textArrive = (TextView) itemView.findViewById(R.id.textArrive);
             textTime = (TextView) itemView.findViewById(R.id.textTime);
-            cancelButton = (Button) itemView.findViewById(R.id.cancelButton);
             itemView.setOnClickListener(this);
             fragment = new Fragment();
         }
